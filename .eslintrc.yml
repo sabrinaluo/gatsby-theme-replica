@@ -1,0 +1,40 @@
+root: true
+
+env:
+  es6: true
+  browser: true
+  node: true
+  jest: true
+
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+
+plugins:
+  - unicorn
+  - react-hooks
+
+extends:
+  - react-app
+  - plugin:prettier/recommended
+  - plugin:react/recommended
+  - plugin:unicorn/recommended
+
+rules:
+  no-console: ['warn', { allow: ['warn', 'error'] }]
+  no-negated-condition: ['error']
+  import/namespace: [2, { allowComputed: true }]
+  no-unused-vars: ['error', { 'ignoreRestSiblings': true }]
+  semi: ['error', 'always']
+
+  unicorn/catch-error-name: off
+  unicorn/escape-case: off
+  unicorn/filename-case: off
+  unicorn/no-process-exit: off
+  unicorn/no-unreadable-array-destructuring: off
+  unicorn/number-literal-case: off
+  unicorn/prefer-query-selector: off
+  unicorn/prevent-abbreviations: off
+
+globals:
+  GA: true

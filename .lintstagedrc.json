@@ -1,0 +1,10 @@
+{
+  "*.json": ["prettier --write", "git add"],
+  "*.md": ["prettier --write", "git add"],
+  "*.{js,jsx}": [
+    "import-sort --write",
+    "prettier --write",
+    "eslint --fix",
+    "git add"
+  ]
+}
