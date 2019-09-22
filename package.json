@@ -39,5 +39,8 @@
       "commit-msg": "commitlint -e $GIT_PARAMS",
       "pre-commit": "lint-staged"
     }
+  },
+  "dependencies": {
+    "typescript": "^3.6.3"
   }
 }
