@@ -5,6 +5,29 @@
   "author": "HiiTea <luohaojing@gmail.com> (@sabrinaluo)",
   "license": "MIT",
   "peerDependencies": {
-    "gatsby": "^2.6.0"
+    "@types/node": "^12.7.5",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "gatsby": "^2.13.41",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "dependencies": {
+    "gatsby-plugin-typescript": "^2.1.9",
+    "gatsby-source-filesystem": "^2.1.6",
+    "gatsby-transformer-remark": "^2.6.9",
+    "gatsby-transformer-yaml": "^2.2.4",
+    "styled-components": "^4.3.2"
+  },
+  "scripts": {
+    "develop": "gatsby develop"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.5",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "gatsby": "^2.13.41",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }

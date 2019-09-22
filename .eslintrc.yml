@@ -12,12 +12,10 @@ parserOptions:
 
 plugins:
   - unicorn
-  - react-hooks
 
 extends:
   - react-app
   - plugin:prettier/recommended
-  - plugin:react/recommended
   - plugin:unicorn/recommended
 
 rules:
