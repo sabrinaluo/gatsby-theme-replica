@@ -1,8 +1,8 @@
 import { graphql, useStaticQuery } from 'gatsby';
+import React from 'react';
 
 import Layout from '../components/layout';
 import PostList from '../components/PostList';
-import React from 'react';
 
 const HomeTemplate = () => {
   const data = useStaticQuery(graphql`
