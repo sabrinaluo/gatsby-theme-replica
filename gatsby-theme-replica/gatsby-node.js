@@ -1,4 +1,6 @@
 const fs = require('fs');
+const { createFilePath } = require(`gatsby-source-filesystem`);
+
 const DEFAULT_BASE_PATH = '/';
 const DEFAULT_CONTENT_PATH = 'content';
 // Make sure the content directory exists
@@ -11,7 +13,23 @@ exports.onPreBootstrap = ({ reporter }, options) => {
   }
 };
 
-exports.onCreateNode = () => {};
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions;
+  if (node.internal.type === `MarkdownRemark`) {
+    const slug = createFilePath({
+      node,
+      getNode,
+      basePath: `content`,
+      trailingSlash: false,
+    });
+
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug,
+    });
+  }
+};
 
 // Define the `Post` type
 exports.sourceNodes = ({ actions }) => {
