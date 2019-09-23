@@ -1,5 +1,5 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-const TopBar = () => <div>top bar</div>;
+const TopBar: FC = () => <div>top bar</div>;
 
 export default TopBar;

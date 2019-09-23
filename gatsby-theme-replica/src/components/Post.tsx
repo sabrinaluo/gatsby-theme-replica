@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 // const getDate = (date, { day = true, month = true, year = true } = {}) =>
 //   date.toLocaleDateString('en-US', {
@@ -6,8 +6,8 @@ import React from 'react';
 //     month: month ? 'long' : undefined,
 //     year: year ? 'numeric' : undefined,
 //   });
-const EventDate = data => {
-  console.log(data);
+
+const EventDate: FC<any> = () => {
   const isOneDay = true;
   return (
     <>
@@ -16,7 +16,8 @@ const EventDate = data => {
     </>
   );
 };
-const Post = ({ name, id, location, url, startDate, endDate }) => (
+
+const Post: FC<any> = ({ name, id, location, url, startDate, endDate }) => (
   <div>
     <h2>
       {name} ({location})

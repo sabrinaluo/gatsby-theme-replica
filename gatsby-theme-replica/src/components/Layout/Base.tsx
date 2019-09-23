@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import TopBar from './TopBar';
 
-const BaseLayout = ({ children }) => (
+const BaseLayout: FC = ({ children }) => (
   <div>
     <TopBar />
     {children}

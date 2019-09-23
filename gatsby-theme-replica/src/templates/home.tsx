@@ -1,10 +1,10 @@
 import { graphql, useStaticQuery } from 'gatsby';
-import React from 'react';
+import React, { FC } from 'react';
 
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import PostList from '../components/PostList';
 
-const HomeTemplate = () => {
+const HomeTemplate: FC = () => {
   const data = useStaticQuery(graphql`
     query {
       allMarkdownRemark(sort: { order: ASC, fields: frontmatter___date }) {
