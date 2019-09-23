@@ -5,7 +5,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "yarn workspace example build"
+    "build": "yarn workspace example build",
+    "dev": "yarn workspace example develop"
   },
   "workspaces": [
     "gatsby-theme-replica",
