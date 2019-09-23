@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build": "yarn workspace example build",
-    "dev": "yarn workspace example develop"
+    "dev": "yarn workspace example develop",
+    "clean": "yarn workspace example clean"
   },
   "workspaces": [
     "gatsby-theme-replica",
