@@ -1,33 +1,16 @@
 import React, { FC } from 'react';
 
-// const getDate = (date, { day = true, month = true, year = true } = {}) =>
-//   date.toLocaleDateString('en-US', {
-//     day: day ? 'numeric' : undefined,
-//     month: month ? 'long' : undefined,
-//     year: year ? 'numeric' : undefined,
-//   });
+interface Props {
+  html: string;
+  info: {
+    date: string;
+  };
+}
 
-const EventDate: FC<any> = () => {
-  const isOneDay = true;
-  return (
-    <>
-      <time dateTime=''></time>
-      {!isOneDay && <>6878</>}
-    </>
-  );
-};
-
-const Post: FC<any> = ({ name, id, location, url, startDate, endDate }) => (
+const Post: FC<Props> = ({ html, info }) => (
   <div>
-    <h2>
-      {name} ({location})
-    </h2>
-    <p>
-      <EventDate startDate={startDate} endDate={endDate} />
-    </p>
-    <p>
-      Website: <a href={url}>{url}</a> {id}
-    </p>
+    {info.date}
+    <div dangerouslySetInnerHTML={{ __html: html }} />
   </div>
 );
 
