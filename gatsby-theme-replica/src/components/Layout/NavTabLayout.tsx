@@ -2,11 +2,12 @@ import React, { FC } from 'react';
 
 import PageWrapper from '../global/PageWrapper';
 import BaseLayout from './BaseLayout';
+import NavTab from './NavTab';
 
 const NavTabLayout: FC = ({ children }) => {
   return (
     <BaseLayout>
-      tab tab tab
+      <NavTab />
       <PageWrapper>{children}</PageWrapper>
     </BaseLayout>
   );
