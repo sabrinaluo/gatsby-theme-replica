@@ -17,6 +17,7 @@
     "gatsby-source-filesystem": "^2.1.6",
     "gatsby-transformer-remark": "^2.6.9",
     "gatsby-transformer-yaml": "^2.2.4",
+    "normalize.css": "^8.0.1",
     "styled-components": "^4.3.2"
   },
   "scripts": {
@@ -26,6 +27,7 @@
     "@types/node": "^12.7.5",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
+    "@types/styled-components": "^4.1.19",
     "gatsby": "^2.13.41",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
