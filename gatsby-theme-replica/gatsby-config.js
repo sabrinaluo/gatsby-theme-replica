@@ -5,6 +5,7 @@ module.exports = ({ contentPath = DEFAULT_CONTENT_PATH }) => ({
     title: `Title from siteMetadata 111`,
   },
   plugins: [
+    `gatsby-plugin-sass`,
     'gatsby-plugin-typescript',
     {
       resolve: 'gatsby-source-filesystem',
