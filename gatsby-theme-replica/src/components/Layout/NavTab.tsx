@@ -10,10 +10,19 @@ const StyledWrapper = styled.div`
   background-color: #fafbfc;
 `;
 
+const TabBar = styled.div``;
+
+const InnerWrapper = styled.div`
+  margin-bottom: 20px;
+`;
+
 const NavTab: FC = () => {
   return (
     <StyledWrapper>
-      <PageWrapper> tab tab</PageWrapper>
+      <PageWrapper>
+        <InnerWrapper> text text </InnerWrapper>
+        <TabBar>tabtab</TabBar>
+      </PageWrapper>
     </StyledWrapper>
   );
 };
