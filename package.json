@@ -7,7 +7,8 @@
   "scripts": {
     "build": "yarn workspace example build",
     "dev": "yarn workspace example develop",
-    "clean": "yarn workspace example clean"
+    "clean": "yarn workspace example clean",
+    "eslint": "eslint --ext .js,.jsx,.ts,.tsx ."
   },
   "workspaces": [
     "gatsby-theme-replica",
@@ -36,12 +37,6 @@
     "import-sort-style-module": "^6.0.0",
     "lint-staged": "^10.0.7",
     "prettier": "^1.19.1"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -e $GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
   },
   "dependencies": {
     "typescript": "^3.6.3"
