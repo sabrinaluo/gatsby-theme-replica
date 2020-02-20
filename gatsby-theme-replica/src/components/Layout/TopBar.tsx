@@ -48,9 +48,10 @@ const TopBar: FC = () => (
     <InnerWrapper>
       <input />
       <NavList>
-        <li>1234</li>
-        <li>1234</li>
-        <li>1234</li>
+        <li>Archives</li>
+        <li>Categories</li>
+        <li>Tags</li>
+        <li>RSS</li>
       </NavList>
     </InnerWrapper>
     <IconList>

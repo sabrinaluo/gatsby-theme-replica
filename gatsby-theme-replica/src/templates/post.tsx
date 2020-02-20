@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 
 import Layout, { LayoutMode } from '../components/Layout';
 import Post from '../components/Post';
+import Tag from '../components/Tag';
 
 export const query = graphql`
   query($postID: String!) {
@@ -30,6 +31,7 @@ interface Props {
 const PostTemplate: FC<Props> = ({ data }) => {
   return (
     <Layout mode={LayoutMode.NavTab}>
+      <Tag href='about'>about</Tag>
       <Post {...data.post} />
     </Layout>
   );

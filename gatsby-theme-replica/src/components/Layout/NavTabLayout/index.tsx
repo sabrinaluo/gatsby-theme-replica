@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 
-import PageWrapper from '../global/PageWrapper';
-import BaseLayout from './BaseLayout';
+import PageWrapper from '../../global/PageWrapper';
+import BaseLayout from '../BaseLayout';
 import NavTab from './NavTab';
 
-const NavTabLayout: FC = ({ children }) => {
+const Index: FC = ({ children }) => {
   return (
     <BaseLayout>
       <NavTab />
@@ -13,4 +13,4 @@ const NavTabLayout: FC = ({ children }) => {
   );
 };
 
-export default NavTabLayout;
+export default Index;

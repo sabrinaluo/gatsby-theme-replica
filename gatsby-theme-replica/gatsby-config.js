@@ -7,6 +7,7 @@ module.exports = ({ contentPath = DEFAULT_CONTENT_PATH }) => ({
   plugins: [
     `gatsby-plugin-sass`,
     'gatsby-plugin-typescript',
+    'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
