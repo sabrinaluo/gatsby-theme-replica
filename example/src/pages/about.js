@@ -1,3 +1,3 @@
-import React from "react"
+import React from 'react';
 
-export default () => <div>Homepage in a user's site</div>
+export default () => <div>Homepage in a user's site</div>;

@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-//TODO [2019-10-01] normalize css
 const Wrapper = styled.div`
   height: 32px;
   padding: 16px;

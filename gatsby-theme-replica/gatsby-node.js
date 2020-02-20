@@ -48,7 +48,7 @@ exports.createResolvers = ({ createResolvers }, options) => {
   const slugify = str => {
     const slug = str
       .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/[^\da-z]+/g, '-')
       .replace(/(^-|-$)+/g, '');
     return `/${basePath}/${slug}`.replace(/\/\/+/g, '/');
   };

@@ -27,7 +27,6 @@ interface Props {
   };
 }
 
-//todo [2019-10-01]  meta data
 const PostTemplate: FC<Props> = ({ data }) => {
   return (
     <Layout mode={LayoutMode.NavTab}>
