@@ -4,6 +4,9 @@
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
+  "engines": {
+    "node": ">=8"
+  },
   "scripts": {
     "build": "yarn workspace example build",
     "dev": "yarn workspace example develop",
@@ -17,9 +20,9 @@
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
-    "@typescript-eslint/eslint-plugin": "^2.20.0",
-    "@typescript-eslint/parser": "^2.20.0",
-    "babel-eslint": "10.x",
+    "@typescript-eslint/eslint-plugin": "^2.23.0",
+    "@typescript-eslint/parser": "^2.23.0",
+    "babel-eslint": "10.1.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-config-react-app": "^5.2.0",
@@ -27,18 +30,18 @@
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-react": "^7.18.3",
-    "eslint-plugin-react-hooks": "^2.4.0",
-    "eslint-plugin-unicorn": "^16.1.1",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.0",
+    "eslint-plugin-unicorn": "^17.2.0",
     "husky": "^4.2.3",
     "import-sort-cli": "^6.0.0",
     "import-sort-parser-babylon": "^6.0.0",
     "import-sort-parser-typescript": "^6.0.0",
     "import-sort-style-module": "^6.0.0",
-    "lint-staged": "^10.0.7",
+    "lint-staged": "^10.0.8",
     "prettier": "^1.19.1"
   },
   "dependencies": {
-    "typescript": "^3.6.3"
+    "typescript": "^3.8.2"
   }
 }

@@ -2,7 +2,7 @@
   "name": "gatsby-theme-replica",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "HiiTea <luohaojing@gmail.com> (@sabrinaluo)",
+  "author": "HiiTea (github@sabrinaluo)",
   "license": "MIT",
   "peerDependencies": {
     "@types/node": "^12.7.5",
@@ -13,31 +13,31 @@
     "react-dom": "^16.8.6"
   },
   "dependencies": {
-    "@mdi/js": "^4.4.95",
+    "@mdi/js": "^5.0.45",
     "@mdi/react": "^1.2.1",
-    "@types/styled-components": "^4.1.19",
-    "gatsby-plugin-react-helmet": "^3.1.22",
-    "gatsby-plugin-sass": "^2.1.15",
-    "gatsby-plugin-typescript": "^2.1.9",
-    "gatsby-source-filesystem": "^2.1.6",
-    "gatsby-transformer-remark": "^2.6.9",
-    "gatsby-transformer-yaml": "^2.2.4",
+    "gatsby-plugin-react-helmet": "^3.1.23",
+    "gatsby-plugin-sass": "^2.1.30",
+    "gatsby-plugin-typescript": "^2.2.2",
+    "gatsby-source-filesystem": "^2.1.54",
+    "gatsby-transformer-remark": "^2.6.58",
+    "gatsby-transformer-yaml": "^2.2.26",
     "node-sass": "^4.12.0",
     "normalize.css": "^8.0.1",
     "react-helmet": "^5.2.1",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "typescript": "^3.8.3"
   },
   "scripts": {
     "develop": "gatsby develop"
   },
   "devDependencies": {
-    "@types/node": "^13.7.4",
-    "@types/react": "^16.9.21",
+    "@types/node": "^13.9.0",
+    "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
     "@types/react-helmet": "^5.0.15",
-    "@types/styled-components": "^4.1.19",
-    "gatsby": "^2.19.19",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "@types/styled-components": "^5.0.1",
+    "gatsby": "^2.19.41",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
   }
 }
