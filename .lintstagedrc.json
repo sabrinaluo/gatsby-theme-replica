@@ -3,6 +3,7 @@
   "*.md": ["prettier --write"],
   "*.{js,jsx,ts,tsx}": [
     "import-sort --write",
+    "stylelint",
     "prettier --write",
     "eslint --fix"
   ]
