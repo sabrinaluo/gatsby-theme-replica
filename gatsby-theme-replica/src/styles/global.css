@@ -1,0 +1,18 @@
+@tailwind base;
+body {
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+}
+a {
+  color: #0366d6;
+}
+
+@tailwind components;
+.page-grid{
+  @apply w-full;
+  @apply max-w-screen-xl;
+  @apply px-4;
+  @apply m-auto;
+  @apply flex
+}
+
+@tailwind utilities;
