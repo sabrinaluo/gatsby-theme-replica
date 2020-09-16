@@ -1,17 +1,18 @@
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React, { FC } from 'react';
 
 interface Props {
-  html: string;
+  body: string;
   info: {
     date: string;
   };
 }
 
-const Post: FC<Props> = ({ html, info }) => (
-  <div>
+const Post: FC<Props> = ({ body, info }) => (
+  <article>
     {info.date}
-    <div dangerouslySetInnerHTML={{ __html: html }} />
-  </div>
+    <MDXRenderer>{body}</MDXRenderer>
+  </article>
 );
 
 export default Post;

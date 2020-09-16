@@ -1,11 +1,12 @@
 const DEFAULT_CONTENT_PATH = 'content';
+require('ts-node').register({ files: true });
 
 module.exports = ({ contentPath = DEFAULT_CONTENT_PATH }) => ({
   siteMetadata: {
     title: `Title from siteMetadata 111`,
   },
   plugins: [
-    `gatsby-plugin-sass`,
+    'gatsby-plugin-postcss',
     'gatsby-plugin-typescript',
     'gatsby-plugin-react-helmet',
     {
@@ -16,13 +17,9 @@ module.exports = ({ contentPath = DEFAULT_CONTENT_PATH }) => ({
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: 'gatsby-plugin-mdx',
       options: {
-        commonmark: true,
-        footnotes: true,
-        pedantic: true,
-        gfm: true,
-        plugins: [],
+        extensions: [`.mdx`, `.md`],
       },
     },
   ],

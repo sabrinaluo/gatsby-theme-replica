@@ -1,8 +1,9 @@
 const fs = require('fs');
 const { createFilePath } = require(`gatsby-source-filesystem`);
+require('ts-node').register({ files: true });
 
-const DEFAULT_BASE_PATH = '/';
 const DEFAULT_CONTENT_PATH = 'content';
+
 // Make sure the content directory exists
 exports.onPreBootstrap = ({ reporter }, options) => {
   const contentPath = options.contentPath || DEFAULT_CONTENT_PATH;
@@ -15,75 +16,49 @@ exports.onPreBootstrap = ({ reporter }, options) => {
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
-  if (node.internal.type === `MarkdownRemark`) {
-    const slug = createFilePath({
-      node,
-      getNode,
-      basePath: `content`,
-      trailingSlash: false,
-    });
-
+  if (node.internal.type === 'Mdx') {
+    const value = createFilePath({ node, getNode });
     createNodeField({
+      name: 'slug',
       node,
-      name: `slug`,
-      value: slug,
+      value: `/post${value}`,
     });
   }
 };
 
-// Define the `Post` type
-exports.sourceNodes = ({ actions }) => {
-  actions.createTypes(`
-    type Post implements Node @dontInfer {
-      id: ID!
-    }
-  `);
+const pages = [
+  {
+    path: '',
+    component: 'home',
+  },
+  {
+    path: 'categories',
+    component: 'category',
+  },
+  {
+    path: 'archives',
+    component: 'archive',
+  },
+];
+
+const trimTailingSlash = (str) => {
+  const hasTailingSlash = str.slice(-1) === '/';
+  return hasTailingSlash ? str.slice(0, -1) : str;
 };
 
-// Define resolvers for custom fields
-
-exports.createResolvers = ({ createResolvers }, options) => {
-  const basePath = options.basePath || DEFAULT_BASE_PATH;
-  // Quick-and-dirty helper to convert strings into URL-friendly slugs.
-  const slugify = str => {
-    const slug = str
-      .toLowerCase()
-      .replace(/[^\da-z]+/g, '-')
-      .replace(/(^-|-$)+/g, '');
-    return `/${basePath}/${slug}`.replace(/\/\/+/g, '/');
-  };
-
-  createResolvers({
-    Query: {
-      markdownRemark: {
-        slug: {
-          resolve: source => slugify(source.name),
-        },
-      },
-    },
-  });
-};
-
-exports.createPages = async ({ actions, graphql, reporter }, options) => {
-  const basePath = options.basePath || DEFAULT_BASE_PATH;
-
-  actions.createPage({
-    path: basePath,
-    component: require.resolve('./src/templates/home.tsx'),
-  });
-
+exports.createPages = async ({ actions, graphql, reporter }) => {
   const result = await graphql(`
     query {
-      allMarkdownRemark(sort: { order: ASC, fields: frontmatter___date }) {
+      allMdx {
         nodes {
           id
           fields {
             slug
           }
-          frontmatter {
-            title
-          }
         }
+      }
+      site {
+        pathPrefix
       }
     }
   `);
@@ -93,11 +68,19 @@ exports.createPages = async ({ actions, graphql, reporter }, options) => {
     return;
   }
 
-  const posts = result.data.allMarkdownRemark.nodes;
-  posts.forEach(post => {
-    const slug = post.fields.slug;
+  const prefix = trimTailingSlash(result.data.site.pathPrefix);
+
+  pages.forEach((page) => {
     actions.createPage({
-      path: slug,
+      path: `${prefix}/${page.path}`,
+      component: require.resolve(`./src/templates/${page.component}.tsx`),
+    });
+  });
+
+  const posts = result.data.allMdx.nodes;
+  posts.forEach((post) => {
+    actions.createPage({
+      path: `${prefix}${post.fields.slug}`,
       component: require.resolve('./src/templates/post.tsx'),
       context: {
         postID: post.id,

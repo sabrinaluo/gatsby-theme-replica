@@ -1,14 +1,14 @@
 import { graphql } from 'gatsby';
 import React, { FC } from 'react';
 
-import Layout, { LayoutMode } from '../components/Layout';
+import Layout from '../components/Layout';
 import Post from '../components/Post';
 import Tag from '../components/Tag';
 
 export const query = graphql`
   query($postID: String!) {
-    post: markdownRemark(id: { eq: $postID }) {
-      html
+    post: mdx(id: { eq: $postID }) {
+      body
       info: frontmatter {
         date(fromNow: true)
         title
@@ -20,7 +20,7 @@ export const query = graphql`
 interface Props {
   data: {
     post: {
-      html: string;
+      body: string;
       info: {
         date: string;
       };
@@ -30,7 +30,7 @@ interface Props {
 
 const PostTemplate: FC<Props> = ({ data }) => {
   return (
-    <Layout mode={LayoutMode.NavTab}>
+    <Layout>
       <Tag href='about'>about</Tag>
       <Post {...data.post} />
     </Layout>
