@@ -22,5 +22,11 @@ module.exports = ({ contentPath = DEFAULT_CONTENT_PATH }) => ({
         extensions: [`.mdx`, `.md`],
       },
     },
+    {
+      resolve: `gatsby-plugin-purgecss`,
+      options: {
+        tailwind: true,
+      },
+    },
   ],
 });
