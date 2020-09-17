@@ -14,9 +14,9 @@ const StyledIconLink = styled(Link)`
 `;
 
 const Footer: FC = () => (
-  <footer className={`border-t mt-10 pt-10`}>
+  <footer className={`border-t mt-10 pt-10 mb-4 md:mb-10`}>
     <div
-      className={`page-grid flex flex-wrap items-center md:justify-between text-xs md:flex-row md:mb-10`}
+      className={`page-grid flex flex-wrap items-center md:justify-between text-xs md:flex-row`}
     >
       <ul className={`flex flex-wrap justify-between w-full md:w-5/12`}>
         {config.footerList?.map((o) => (
@@ -50,6 +50,17 @@ const Footer: FC = () => (
         <span style={{ color: 'hotpink' }}>♥</span> Powered by Gatsby
       </div>
     </div>
+    {config.flagCounter && (
+      <div className={`page-grid flex justify-center mt-4`}>
+        <a
+          href={config.flagCounter.url}
+          target='_blank'
+          className={`h-16 overflow-hidden`}
+        >
+          <img src={config.flagCounter.image} />
+        </a>
+      </div>
+    )}
   </footer>
 );
 
