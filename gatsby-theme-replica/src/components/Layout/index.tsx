@@ -12,7 +12,7 @@ interface Props {
 }
 
 const Layout: FC<Props> = ({ children, mode }) => {
-  let LayoutComp = SimpleLayoutLayout;
+  let LayoutComp;
   switch (mode) {
     case LayoutMode.NavTab:
       LayoutComp = NavTabLayout;
