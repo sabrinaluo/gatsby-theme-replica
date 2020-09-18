@@ -1,28 +1,19 @@
-import { Link } from 'gatsby';
 import React, { FC } from 'react';
 
-interface Props {
-  posts: any[];
+import PostCard, { Props as PostProps } from './PostCard';
+
+export interface Props {
+  posts: PostProps[];
 }
+
 const PostList: FC<Props> = ({ posts }) => (
   <>
-    <h2>Upcoming Events</h2>
-    <ul>
-      {posts.map(post => (
-        <li key={post.id}>
-          <strong>
-            <Link to={post.fields.slug}>{post.frontmatter.title}</Link>
-          </strong>
-          <br />
-          {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric',
-          })}{' '}
-          in {post.location}
-        </li>
+    <div className={`mt-6`}>Pinned</div>
+    <div className={`grid gap-4 grid-cols-1 md:grid-cols-2`}>
+      {posts?.map((post) => (
+        <PostCard {...post} />
       ))}
-    </ul>
+    </div>
   </>
 );
 
