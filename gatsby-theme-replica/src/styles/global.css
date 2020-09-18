@@ -1,11 +1,16 @@
 @tailwind base;
 body {
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
-  color: #24292e;
+  @apply text-gray-dark;
+}
+
+* {
+  transition: width 200ms ease-in;
+  @apply border-gray-light;
 }
 
 a {
-  color: #0366d6;
+  @apply text-blue;
 }
 
 a:hover{

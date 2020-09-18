@@ -1,65 +1,58 @@
+import { Link } from 'gatsby';
 import React, { FC } from 'react';
-import styled from 'styled-components';
+import { AiOutlineMenu } from 'react-icons/ai';
+import { FaGithub } from 'react-icons/fa';
+import { IoIosAdd, IoIosNotificationsOutline } from 'react-icons/io';
+import { RiArrowDropDownFill } from 'react-icons/ri';
 
-const Wrapper = styled.div`
-  height: 32px;
-  padding: 16px;
-  background-color: rgb(36, 41, 46);
-  color: rgba(255, 255, 255, 0.7);
-  display: flex;
-  align-items: center;
-`;
-
-const InnerWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-`;
-
-const NavList = styled.ul`
-  list-style: none;
-  display: flex;
-  font-weight: 600;
-  color: #fff;
-
-  li {
-    margin-right: 16px;
-  }
-`;
-
-const IconList = styled.ul`
-  list-style: none;
-  display: flex;
-  font-weight: 600;
-  color: #fff;
-
-  li {
-    margin-right: 16px;
-  }
-
-  li:last-child {
-    margin-right: 0;
-  }
-`;
+import { navTabs } from '../../constants/nav';
 
 const TopBar: FC = () => (
-  <Wrapper>
-    <div>icon</div>
-    <InnerWrapper>
-      <input />
-      <NavList>
-        <li>Archives</li>
-        <li>Categories</li>
-        <li>Tags</li>
-        <li>RSS</li>
-      </NavList>
-    </InnerWrapper>
-    <IconList>
-      <li>noti</li>
-      <li>add</li>
-      <li>avatar</li>
-    </IconList>
-  </Wrapper>
+  <div
+    className={`bg-gray-dark w-full flex px-4 md:px-6 justify-between md:justify-auto items-center h-60px md:h-64px`}
+  >
+    <div className={`block md:hidden text-white text-3xl`}>
+      <AiOutlineMenu />
+    </div>
+
+    <Link to='/' className={`text-white`}>
+      <FaGithub size={32} />
+    </Link>
+
+    <div className={`hidden md:flex items-center flex-grow px-4`}>
+      <input className={`w-64 focus:w-1/2`} />
+      <div className={`flex ml-2 text-sm font-semibold`}>
+        {navTabs.map((item) => (
+          <Link
+            key={item.text}
+            to={item.href}
+            className={`mx-2 py-4 text-white hover:no-underline hover:text-opacity-75`}
+          >
+            {item.text}
+          </Link>
+        ))}
+      </div>
+    </div>
+    <ul className={`flex items-center text-white font-semibold`}>
+      <li>
+        <IoIosNotificationsOutline
+          className={`mr-0 md:mr-2 text-2xl md:text-xl`}
+        />
+      </li>
+      <li className={`hidden md:flex mr-2`}>
+        <IoIosAdd className={`text-xl relative left-1`} />
+        <RiArrowDropDownFill className={`text-xl`} />
+      </li>
+      <li className={`hidden md:flex -mr-2`}>
+        <img
+          src={`https://avatars2.githubusercontent.com/u/5300359?s=460&u=ad93a82d45a91c8f6e70ec438d788c7e873ef6b5&v=4`}
+          className={`rounded-full`}
+          width={20}
+        />
+        <RiArrowDropDownFill className={`text-xl`} />
+      </li>
+    </ul>
+  </div>
 );
 
 export default TopBar;
