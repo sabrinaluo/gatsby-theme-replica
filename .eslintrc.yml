@@ -33,6 +33,7 @@ rules:
   unicorn/number-literal-case: off
   unicorn/prefer-query-selector: off
   unicorn/prevent-abbreviations: off
+  unicorn/no-null: off
 
 globals:
   GA: true
