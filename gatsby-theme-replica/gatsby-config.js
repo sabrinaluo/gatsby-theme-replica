@@ -24,6 +24,12 @@ module.exports = ({ contentPath = DEFAULT_CONTENT_PATH }) => ({
       },
     },
     {
+      resolve: `gatsby-plugin-styled-components`,
+      options: {
+        displayName: process.env.NODE_ENV !== 'production',
+      },
+    },
+    {
       resolve: `gatsby-plugin-nprogress`,
       options: {
         color: tailwindConfig.theme.extend.colors.blue.default,
