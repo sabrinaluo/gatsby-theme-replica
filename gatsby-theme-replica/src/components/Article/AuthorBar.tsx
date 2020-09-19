@@ -10,7 +10,6 @@ const StyledBox = styled.div`
     content: ' ';
     width: 10px;
     height: 10px;
-    border: red;
     position: absolute;
     border-left: 1px solid ${color.blue.light};
     border-bottom: 1px solid ${color.blue.light};
