@@ -30,6 +30,7 @@ module.exports = {
   purge: [
     path.resolve(__dirname, './src/**/*.tsx'),
     path.resolve(__dirname, './src/**/*.css'),
+    path.resolve(__dirname, './gatsby-browser.js'),
   ],
   theme: {
     extend: {
