@@ -50,9 +50,13 @@ const trimTailingSlash = (str) => {
 };
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
+  // Exclude README.md, it's reserved to be a section in overview page
   const result = await graphql(`
     query {
-      allMdx {
+      allMdx(
+        filter: { slug: { ne: "README" } }
+        sort: { fields: frontmatter___date, order: ASC }
+      ) {
         nodes {
           id
           slug
@@ -118,14 +122,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   try {
     const posts = result.data.allMdx.nodes;
-    posts.forEach((post) => {
-      // don't create post for README.md, it's reserved to be a section in overview page
-      if (post.slug.toUpperCase() === 'README') return;
+
+    posts.forEach((post, index) => {
       actions.createPage({
         path: `${prefix}${post.fields.slug}`,
         component: require.resolve('./src/templates/post.tsx'),
         context: {
           postID: post.id,
+          numericId: index + 1,
         },
       });
     });
