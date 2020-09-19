@@ -1,40 +1,80 @@
 import { graphql } from 'gatsby';
 import React, { FC } from 'react';
 
+import config from '../../_config';
+import ArticleContent, {
+  Props as PostProps,
+} from '../components/Article/ArticleContent';
+import ArticleTitle from '../components/Article/ArticleTitle';
+import AuthorBar from '../components/Article/AuthorBar';
 import Layout from '../components/Layout';
-import Post from '../components/Post';
 import Tag from '../components/Tag';
+
+interface Props {
+  pageContext: {
+    numericId: number;
+  };
+  data: {
+    post: PostProps;
+  };
+}
+
+const PostTemplate: FC<Props> = ({ data, pageContext }) => {
+  const { title, date, relativeDate, tags, formattedDate } = data.post.info;
+  const { timeToRead } = data.post;
+  const { numericId } = pageContext;
+
+  return (
+    <Layout>
+      <div className={`page-grid mt-4 md:px-8`}>
+        <ArticleTitle
+          title={title}
+          numericId={numericId}
+          relativeDate={relativeDate}
+          timeToRead={timeToRead}
+        />
+        <div className={`w-full md:w-9/12 md:pr-4 md:border-b-0 mb-4`}>
+          <div className={`relative`}>
+            <img
+              src={config.avatar}
+              className={`hidden md:block border rounded-full absolute`}
+              width={40}
+            />
+            <div className={`md:ml-14`}>
+              <AuthorBar dateTime={date} formattedDate={formattedDate} />
+              <ArticleContent {...data.post} />
+            </div>
+          </div>
+        </div>
+        <div className={`w-full md:w-3/12 md:pl-4`}>
+          <div className={`pb-4 border-b`}>
+            <h2 className={`mb-4 font-medium`}>About</h2>
+            <div>{tags.map((tag) => tag && <Tag tag={tag} key={tag} />)}</div>
+          </div>
+          <div className={`pb-4 border-b`}>
+            <h2 className={`my-4 font-medium`}>Table of Content</h2>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+};
 
 export const query = graphql`
   query($postID: String!) {
     post: mdx(id: { eq: $postID }) {
       body
       info: frontmatter {
-        date(fromNow: true)
+        relativeDate: date(fromNow: true)
+        formattedDate: date(formatString: "MMM d, YYYY")
+        date
         title
+        tags
       }
+      timeToRead
+      slug
     }
   }
 `;
-
-interface Props {
-  data: {
-    post: {
-      body: string;
-      info: {
-        date: string;
-      };
-    };
-  };
-}
-
-const PostTemplate: FC<Props> = ({ data }) => {
-  return (
-    <Layout>
-      <Tag href='about'>about</Tag>
-      <Post {...data.post} />
-    </Layout>
-  );
-};
 
 export default PostTemplate;

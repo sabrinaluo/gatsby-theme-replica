@@ -1,23 +1,20 @@
+import { Link } from 'gatsby';
 import React, { FC } from 'react';
-import styled from 'styled-components';
+
+import { slugify } from '../../setting/utils';
 
 interface TagProps {
-  href: string;
-  children: string;
+  tag: string;
 }
 
-const Wrapper = styled.a`
-  display: inline-box;
-  padding: 4px 11px;
-  background-color: rgb(241, 248, 255);
-  border-radius: 3px;
-  &:hover {
-    background-color: rgb(221, 238, 255);
-  }
-`;
-
-const Tag: FC<TagProps> = ({ children, href }) => {
-  return <Wrapper href={href}>{children}</Wrapper>;
+const Tag: FC<TagProps> = ({ tag }) => {
+  const url = `/tag/${slugify(tag)}`;
+  return (
+    <Link to={url} className={`tag`}>
+      {' '}
+      {tag}
+    </Link>
+  );
 };
 
 export default Tag;

@@ -60,9 +60,9 @@ const PostCardList: FC = () => {
   return (
     <>
       <div>Recent Posts</div>
-      <div className={`grid gap-4 grid-cols-1 md:grid-cols-2`}>
+      <div className={`grid gap-4 grid-cols-1 md:grid-cols-2 mb-8`}>
         {posts?.map((post) => (
-          <PostCard {...post} />
+          <PostCard {...post} key={post.id} />
         ))}
       </div>
     </>

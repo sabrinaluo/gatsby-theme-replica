@@ -1,0 +1,175 @@
+article {
+  @apply leading-normal;
+  @apply text-base;
+  @apply break-words;
+}
+
+article > * {
+  @apply mb-4;
+}
+
+article > h1,
+article > h2,
+article > h3,
+article > h4,
+article > h5,
+article > h6 {
+  @apply font-semibold;
+  @apply leading-tight;
+  /*@apply mb-4;*/
+  @apply mt-6;
+}
+
+article > *:first-child {
+  @apply mt-0;
+}
+
+article > h1 {
+  @apply text-3xl;
+  @apply pb-2;
+  @apply border-b;
+}
+
+article > h2 {
+  @apply text-2xl;
+  @apply border-b;
+  @apply pb-2;
+}
+
+article > h3 {
+  @apply text-xl;
+}
+
+article > h4 {
+  @apply text-lg;
+}
+
+article > h5 {
+  @apply text-base;
+}
+
+article > h6 {
+  @apply text-sm;
+  @apply text-gray-300;
+}
+
+article > p {
+  /*@apply mb-4;*/
+}
+
+article a:link{
+  @apply text-blue;
+}
+
+article ul,
+article ol {
+  @apply pl-6;
+  /*@apply mb-4;*/
+}
+
+article ul {
+  list-style: disc;
+}
+
+article ul ul {
+  list-style: circle;
+}
+
+article ul ul ul {
+  list-style: square;
+}
+
+article ol {
+  list-style: decimal;
+}
+
+article ol ol {
+  list-style: lower-roman;
+}
+
+article ol ol ol {
+  list-style: lower-alpha;
+}
+
+article hr {
+  @apply my-6;
+  @apply bg-gray-light;
+  height: 2px;
+  content: ' ';
+}
+
+article img {
+  @apply max-w-full;
+}
+
+article > blockquote {
+  @apply px-4;
+  @apply text-gray-300;
+  @apply border-l-4;
+  /*@apply mb-4;*/
+}
+
+article pre {
+  @apply rounded-md;
+  @apply p-4;
+  @apply text-xs;
+  overflow: auto;
+}
+
+article code {
+  @apply rounded-md;
+  @apply bg-gray-100;
+  @apply px-1;
+  @apply py-px;
+  @apply text-sm;
+}
+
+/*article code:before,*/
+/*article code:after {*/
+/*  letter-spacing: -0.2em;*/
+/*  content: "\00a0"*/
+/*}*/
+
+
+article > table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+article > table tr {
+  @apply border;
+  @apply border-gray-light;
+}
+
+article > table tr:nth-child(2n) {
+  @apply bg-gray-100;
+}
+
+article > table th,
+article > table td {
+  @apply px-4;
+  @apply py-2;
+  @apply border;
+  @apply border-gray-light;
+}
+
+article > table th {
+  font-weight: 600;
+}
+
+article > kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: solid 1px #c6cbd1;
+  border-bottom-color: #959da5;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #959da5;
+}
