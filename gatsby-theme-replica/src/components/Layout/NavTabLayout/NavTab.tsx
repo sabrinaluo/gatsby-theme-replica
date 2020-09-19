@@ -35,7 +35,7 @@ const StyledCount = styled.span`
 const NavTab: FC = () => {
   const data = useStaticQuery(graphql`
     query NavTabCount {
-      allMdx {
+      allMdx(filter: { slug: { ne: "README" } }) {
         totalCount
       }
     }
