@@ -10,7 +10,6 @@ const BaseLayout: FC = ({ children }) => (
       <title>My Title</title>
       <link rel='canonical' href='http://mysite.com/example' />
     </Helmet>
-    <div className={`h-2px w-full fixed bg-blue`} />
     <TopBar />
     {children}
     <Footer />
