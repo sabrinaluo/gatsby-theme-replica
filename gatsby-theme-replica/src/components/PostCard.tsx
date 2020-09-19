@@ -30,6 +30,7 @@ const StyledLink = styled(Link)`
     display: inline;
   }
 `;
+
 const PostCard: FC<Props> = ({
   id,
   slug,
@@ -55,7 +56,7 @@ const PostCard: FC<Props> = ({
           </StyledLink>
         )}
         {tagCount > 0 && (
-          <StyledLink to={`/tags`}>
+          <StyledLink to={`/tag`}>
             <AiOutlineTags size={16} /> {tagCount}{' '}
           </StyledLink>
         )}

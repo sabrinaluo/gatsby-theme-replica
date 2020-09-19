@@ -4,7 +4,7 @@ import { FaGithub, FaStackOverflow } from 'react-icons/fa';
 
 import config from '../../_config';
 import Layout, { LayoutMode } from '../components/Layout';
-import PostList from '../components/PostList';
+import PostCardList from '../components/PostCardList';
 import ReadMe from '../components/ReadMe';
 
 export const query = graphql`
@@ -30,38 +30,7 @@ export const query = graphql`
   }
 `;
 
-interface PostNode {
-  id: string;
-  excerpt: string;
-  frontmatter: {
-    title: string;
-    tags: string[];
-    category: string;
-  };
-  fields: {
-    slug: string;
-  };
-}
-interface Props {
-  data: {
-    allMdx: {
-      nodes: PostNode[];
-    };
-  };
-}
-
-const transformPosts = (posts: PostNode[]) =>
-  posts.map(({ id, excerpt, frontmatter, fields }) => ({
-    id,
-    excerpt,
-    title: frontmatter.title,
-    tagCount: frontmatter.tags.length,
-    category: frontmatter.category,
-    slug: fields.slug,
-  }));
-
-const HomeTemplate: FC<Props> = ({ data }) => {
-  const posts = transformPosts(data.allMdx.nodes);
+const HomeTemplate: FC = () => {
   return (
     <Layout mode={LayoutMode.NavTab}>
       <div className={`page-grid flex flex-wrap md:flex-row`}>
@@ -119,7 +88,7 @@ const HomeTemplate: FC<Props> = ({ data }) => {
         </div>
         <div className={`w-full md:w-9/12 md:px-4 pt-6`}>
           <ReadMe />
-          <PostList posts={posts} />
+          <PostCardList />
         </div>
       </div>
     </Layout>
