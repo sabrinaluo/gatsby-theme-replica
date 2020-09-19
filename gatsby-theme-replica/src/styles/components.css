@@ -1,0 +1,26 @@
+.page-grid {
+  @apply w-full;
+  @apply max-w-screen-xl;
+  @apply px-4;
+  @apply m-auto;
+  @apply flex;
+  @apply flex-wrap
+}
+
+.tag {
+  @apply bg-blue-100;
+  @apply rounded-full;
+  @apply px-3;
+  @apply mb-1;
+  @apply border;
+  @apply border-white;
+  @apply text-xs;
+  @apply font-medium;
+  @apply leading-6;
+  display: inline-block;
+}
+
+.tag:hover{
+  @apply bg-blue-150;
+  @apply no-underline;
+}
