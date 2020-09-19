@@ -17,6 +17,10 @@ a:hover{
   text-decoration: underline;
 }
 
+.text-mono {
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace!important;
+}
+
 @tailwind components;
 .page-grid{
   @apply w-full;

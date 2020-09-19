@@ -5,6 +5,7 @@ import { FaGithub } from 'react-icons/fa';
 import { IoIosAdd, IoIosNotificationsOutline } from 'react-icons/io';
 import { RiArrowDropDownFill } from 'react-icons/ri';
 
+import config from '../../../_config';
 import { navTabs } from '../../constants/nav';
 
 const TopBar: FC = () => (
@@ -44,11 +45,7 @@ const TopBar: FC = () => (
         <RiArrowDropDownFill className={`text-xl`} />
       </li>
       <li className={`hidden md:flex -mr-2`}>
-        <img
-          src={`https://avatars2.githubusercontent.com/u/5300359?s=460&u=ad93a82d45a91c8f6e70ec438d788c7e873ef6b5&v=4`}
-          className={`rounded-full`}
-          width={20}
-        />
+        <img src={config.avatar} className={`rounded-full`} width={20} />
         <RiArrowDropDownFill className={`text-xl`} />
       </li>
     </ul>

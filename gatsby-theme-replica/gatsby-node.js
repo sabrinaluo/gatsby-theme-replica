@@ -55,6 +55,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       allMdx {
         nodes {
           id
+          slug
           fields {
             slug
           }
@@ -118,6 +119,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   try {
     const posts = result.data.allMdx.nodes;
     posts.forEach((post) => {
+      // don't create post for README.md, it's reserved to be a section in overview page
+      if (post.slug.toUpperCase() === 'README') return;
       actions.createPage({
         path: `${prefix}${post.fields.slug}`,
         component: require.resolve('./src/templates/post.tsx'),

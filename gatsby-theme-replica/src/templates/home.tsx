@@ -2,12 +2,18 @@ import { graphql } from 'gatsby';
 import React, { FC } from 'react';
 import { FaGithub, FaStackOverflow } from 'react-icons/fa';
 
+import config from '../../_config';
 import Layout, { LayoutMode } from '../components/Layout';
 import PostList from '../components/PostList';
+import ReadMe from '../components/ReadMe';
 
 export const query = graphql`
   query HomepageQuery {
-    allMdx(limit: 6, sort: { order: DESC, fields: frontmatter___date }) {
+    allMdx(
+      limit: 6
+      sort: { order: DESC, fields: frontmatter___date }
+      filter: { slug: { ne: "README" } }
+    ) {
       nodes {
         id
         excerpt(pruneLength: 80)
@@ -64,7 +70,7 @@ const HomeTemplate: FC<Props> = ({ data }) => {
             <div className={`w-2/12 md:w-full`}>
               <img
                 className={`w-full border rounded-full`}
-                src={`https://avatars2.githubusercontent.com/u/5300359?s=460&u=ad93a82d45a91c8f6e70ec438d788c7e873ef6b5&v=4`}
+                src={config.avatar}
               />
             </div>
             <div className={`w-full`}>
@@ -112,7 +118,7 @@ const HomeTemplate: FC<Props> = ({ data }) => {
           </div>
         </div>
         <div className={`w-full md:w-9/12 md:px-4 pt-6`}>
-          <div className={`border rounded-md p-6 w-full`}>123</div>
+          <ReadMe />
           <PostList posts={posts} />
         </div>
       </div>
