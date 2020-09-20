@@ -48,6 +48,9 @@ module.exports = {
       inset: {
         1: '0.25rem',
       },
+      listStyleType: {
+        circle: 'circle',
+      },
     },
   },
   variants: {

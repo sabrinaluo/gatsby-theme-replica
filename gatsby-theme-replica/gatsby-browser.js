@@ -5,7 +5,21 @@ import Highlight, { defaultProps } from 'prism-react-renderer';
 import githubTheme from 'prism-react-renderer/themes/github';
 import React from 'react';
 
+// todo sanitize id
+const getHeadingWithId = () => {
+  return new Array(6).fill(0).reduce((acc, _, index) => {
+    const Comp = `h${index + 1}`;
+    return {
+      ...acc,
+      [Comp]: (props) => {
+        return <Comp id={props.children} {...props} />;
+      },
+    };
+  }, {});
+};
+
 const component = {
+  ...getHeadingWithId(),
   pre: (props) => {
     const className = props.children.props.className || '';
     const matches = className.match(/language-(?<lang>.*)/);
@@ -21,7 +35,7 @@ const component = {
         language={lang}
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <div class={`relative`}>
+          <div className={`relative`}>
             {lang && (
               <div
                 className={`absolute text-gray-dark text-xs px-2 py-px right-0 top-0 bg-gray-light rounded-bl-md rounded-tr-md`}

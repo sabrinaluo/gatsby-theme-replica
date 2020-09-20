@@ -34,6 +34,7 @@ rules:
   unicorn/prefer-query-selector: off
   unicorn/prevent-abbreviations: off
   unicorn/no-null: off
+  unicorn/no-reduce: off
 
 globals:
   GA: true

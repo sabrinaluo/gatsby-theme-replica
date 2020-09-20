@@ -2,26 +2,46 @@ import { graphql } from 'gatsby';
 import React, { FC } from 'react';
 
 import config from '../../_config';
-import ArticleContent, {
-  Props as PostProps,
-} from '../components/Article/ArticleContent';
+import ArticleContent from '../components/Article/ArticleContent';
 import ArticleTitle from '../components/Article/ArticleTitle';
 import AuthorBar from '../components/Article/AuthorBar';
 import Layout from '../components/Layout';
+import TableOfContent from '../components/TableOfContent';
 import Tag from '../components/Tag';
+
+export interface TocItem {
+  url: string;
+  title: string;
+  items?: TocItem[];
+}
+
+interface PostNode {
+  body: string;
+  info: {
+    title: string;
+    date: string;
+    relativeDate: string;
+    formattedDate: string;
+    tags: string[];
+  };
+  timeToRead: number;
+  tableOfContents: {
+    items?: TocItem[];
+  };
+}
 
 interface Props {
   pageContext: {
     numericId: number;
   };
   data: {
-    post: PostProps;
+    post: PostNode;
   };
 }
 
 const PostTemplate: FC<Props> = ({ data, pageContext }) => {
   const { title, date, relativeDate, tags, formattedDate } = data.post.info;
-  const { timeToRead } = data.post;
+  const { timeToRead, tableOfContents, body } = data.post;
   const { numericId } = pageContext;
 
   return (
@@ -42,7 +62,7 @@ const PostTemplate: FC<Props> = ({ data, pageContext }) => {
             />
             <div className={`md:ml-14`}>
               <AuthorBar dateTime={date} formattedDate={formattedDate} />
-              <ArticleContent {...data.post} />
+              <ArticleContent body={body} />
             </div>
           </div>
         </div>
@@ -51,9 +71,12 @@ const PostTemplate: FC<Props> = ({ data, pageContext }) => {
             <h2 className={`mb-4 font-medium`}>About</h2>
             <div>{tags.map((tag) => tag && <Tag tag={tag} key={tag} />)}</div>
           </div>
-          <div className={`pb-4 border-b`}>
-            <h2 className={`my-4 font-medium`}>Table of Content</h2>
-          </div>
+          {tableOfContents.items && (
+            <div className={`pb-4 border-b sticky top-0`}>
+              <h2 className={`my-4 font-medium`}>Table of Content</h2>
+              <TableOfContent items={tableOfContents.items} />
+            </div>
+          )}
         </div>
       </div>
     </Layout>
@@ -71,6 +94,7 @@ export const query = graphql`
         title
         tags
       }
+      tableOfContents(maxDepth: 3)
       timeToRead
       slug
     }
