@@ -18,9 +18,11 @@ const Footer: FC = () => (
     <div
       className={`page-grid flex flex-wrap items-center md:justify-between text-xs md:flex-row`}
     >
-      <ul className={`flex flex-wrap justify-between w-full md:w-5/12`}>
+      <ul
+        className={`flex flex-wrap justify-between w-full md:w-5/12 md:justify-start -mx-2 md:-mx-4`}
+      >
         {config.footerList?.map((o) => (
-          <li className={`mr-4`} key={o.text}>
+          <li className={`mx-2 md:mx-4`} key={o.text}>
             {o.link ? (
               isExternalLink(o.link) ? (
                 <a href={o.link} target='_blank'>
@@ -37,8 +39,7 @@ const Footer: FC = () => (
       </ul>
       <div className={`hidden md:block md:2/12`}>
         <StyledIconLink to={`/`}>
-          {' '}
-          <FaGithub size={24} />{' '}
+          <FaGithub size={32} />
         </StyledIconLink>
       </div>
       <div
@@ -47,7 +48,7 @@ const Footer: FC = () => (
         Theme{' '}
         <a href='https://github.com/sabrinaluo/gatsby-theme-replica'>Replica</a>{' '}
         by <a href='https://hiitea.io'>HiiTea</a>{' '}
-        <span style={{ color: 'hotpink' }}>♥</span> Powered by Gatsby
+        <span className={`text-hotpink`}>♥</span> Powered by Gatsby
       </div>
     </div>
     {config.flagCounter && (
