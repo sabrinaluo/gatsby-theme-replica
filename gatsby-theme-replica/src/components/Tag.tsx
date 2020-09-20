@@ -10,7 +10,7 @@ interface TagProps {
 const Tag: FC<TagProps> = ({ tag }) => {
   const url = `/tag/${slugify(tag)}`;
   return (
-    <Link to={url} className={`tag`}>
+    <Link to={url} className={`topic-tag`}>
       {' '}
       {tag}
     </Link>
