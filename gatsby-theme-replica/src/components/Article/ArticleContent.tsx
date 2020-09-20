@@ -3,14 +3,6 @@ import React, { FC } from 'react';
 
 export interface Props {
   body: string;
-  info: {
-    title: string;
-    date: string;
-    relativeDate: string;
-    formattedDate: string;
-    tags: string[];
-  };
-  timeToRead: number;
 }
 
 const ArticleContent: FC<Props> = ({ body }) => (

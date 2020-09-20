@@ -4,10 +4,11 @@ const colors = {
   gray: {
     50: '#fafbfc',
     100: '#f6f8fa',
-    light: '#e1e4e8',
+    120: '#ebedf0',
     150: '#c6cbd1',
     200: '#959da5',
     300: '#6a737d',
+    light: '#e1e4e8',
     medium: '#767676',
     main: '#586069',
     dark: '#24292e',
@@ -20,6 +21,13 @@ const colors = {
     default: '#0366d6',
   },
   hotpink: '#FF69B4',
+  green: {
+    main: '#2ea44f',
+    superlight: '#9be9a8',
+    light: '#40c463',
+    medium: '#30a14e',
+    dark: '#216e39',
+  },
 };
 
 module.exports = {
@@ -50,6 +58,9 @@ module.exports = {
       },
       listStyleType: {
         circle: 'circle',
+      },
+      fontSize: {
+        '11px': '11px',
       },
     },
   },

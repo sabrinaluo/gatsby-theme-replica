@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { FaGithub, FaStackOverflow } from 'react-icons/fa';
 
 import config from '../../_config';
+import Calendar from '../components/Calendar';
 import Layout, { LayoutMode } from '../components/Layout';
 import PostCardList from '../components/PostCardList';
 import ReadMe from '../components/ReadMe';
@@ -89,6 +90,7 @@ const HomeTemplate: FC = () => {
         <div className={`w-full md:w-9/12 md:px-4 pt-6`}>
           <ReadMe />
           <PostCardList />
+          <Calendar />
         </div>
       </div>
     </Layout>
