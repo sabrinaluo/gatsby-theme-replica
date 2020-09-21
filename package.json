@@ -11,7 +11,8 @@
     "build": "yarn workspace example build",
     "dev": "yarn workspace example develop",
     "clean": "yarn workspace example clean",
-    "eslint": "eslint --ext .js,.jsx,.ts,.tsx ."
+    "eslint": "eslint --ext .js,.jsx,.ts,.tsx .",
+    "test": "yarn workspace gatsby-theme-replica test"
   },
   "workspaces": [
     "gatsby-theme-replica",
