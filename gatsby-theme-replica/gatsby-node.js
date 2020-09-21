@@ -65,6 +65,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           }
         }
       }
+
       site {
         pathPrefix
       }
@@ -103,8 +104,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     });
   });
 
+  const posts = result.data.allMdx.nodes;
+  const years = result.data.years.group;
+  const tags = result.data.tags.group;
+  const categories = result.data.categories.group;
+  const totalTags = tags.length;
+  const totalPosts = posts.length;
+  const totalCategories = categories.length;
+
   try {
-    const years = result.data.years.group;
     years.forEach(({ fieldValue: year }, index) => {
       actions.createPage({
         path: `${prefix}${
@@ -113,6 +121,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         component: require.resolve('./src/templates/home.tsx'), //todo rename to template/overview
         context: {
           year,
+          totalCategories,
+          totalPosts,
+          totalTags,
         },
       });
     });
@@ -121,8 +132,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   try {
-    const posts = result.data.allMdx.nodes;
-
     posts.forEach((post, index) => {
       actions.createPage({
         path: `${prefix}${post.fields.slug}`,
@@ -138,7 +147,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   try {
-    const tags = result.data.tags.group;
     tags.forEach((o) => {
       const slug = utils.slugify(o.fieldValue);
       actions.createPage({
@@ -154,7 +162,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   try {
-    const categories = result.data.categories.group;
     categories.forEach((o) => {
       const slug = utils.slugify(o.fieldValue);
       actions.createPage({

@@ -20,6 +20,10 @@ const colors = {
     light: '#c8e1ff',
     default: '#0366d6',
   },
+  yellow: {
+    light: '#fff5b1',
+    default: '#f9c513',
+  },
   hotpink: '#FF69B4',
   green: {
     main: '#2ea44f',
@@ -50,7 +54,9 @@ module.exports = {
       spacing: {
         14: '3.5rem',
         '2px': '2px',
+        '3px': '3px',
         '60px': '60px',
+        '64px': '64px',
         '74px': '74px',
       },
       inset: {
@@ -61,6 +67,7 @@ module.exports = {
       },
       fontSize: {
         '11px': '11px',
+        '26px': '26px',
       },
     },
   },

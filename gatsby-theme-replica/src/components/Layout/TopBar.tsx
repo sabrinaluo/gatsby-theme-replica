@@ -10,7 +10,7 @@ import { navTabs } from '../../constants/nav';
 
 const TopBar: FC = () => (
   <div
-    className={`bg-gray-dark w-full flex px-4 md:px-6 justify-between md:justify-auto items-center h-60px md:h-64px`}
+    className={`bg-gray-dark w-full flex px-4 md:px-6 justify-between md:justify-auto items-center h-64px md:h-60px`}
   >
     <div className={`block md:hidden text-white text-3xl`}>
       <AiOutlineMenu />
