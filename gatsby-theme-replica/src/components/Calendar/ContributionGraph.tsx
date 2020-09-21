@@ -1,8 +1,8 @@
 import React, { CSSProperties, FC, useContext, useState } from 'react';
 import styled from 'styled-components';
 
+import { WEEK_DAY_TEXT, getCalendarData } from '../../utils/calendar';
 import { CalendarContext } from './CalendarContext';
-import { WEEK_DAY_TEXT, getCalendarData } from './utils';
 
 const StyledSvg = styled.svg`
   text {
