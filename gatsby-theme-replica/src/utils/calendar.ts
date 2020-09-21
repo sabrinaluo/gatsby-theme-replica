@@ -32,9 +32,38 @@ interface MonthData {
   text: string;
 }
 
-export const getCalendarData = (endDate: Date = new Date()) => {
+export const getMonthLabels = (endDate: Date) => {
+  const data: MonthData[] = [];
+  const firstDate = getFirstCalendarSunday(endDate);
+
+  for (let i = 0; i <= TOTAL_WEEKS_PER_YEAR; i++) {
+    const sunday = new Date(firstDate.getTime() + i * 7 * ONE_DAY_IN_MS);
+    const month = sunday.getMonth();
+    const nextColMonth = new Date(
+      sunday.getTime() + 7 * ONE_DAY_IN_MS
+    ).getMonth();
+
+    // avoid labels overlapping next to each cols
+    if (i === 0 && month !== nextColMonth) {
+      continue;
+    }
+
+    const prevColMonth = new Date(
+      sunday.getTime() - 7 * ONE_DAY_IN_MS
+    ).getMonth();
+    if (i === 0 || month !== prevColMonth) {
+      data.push({
+        month,
+        text: MONTH_TEXT[month],
+        x: 14 + i * 13,
+      });
+    }
+  }
+  return data;
+};
+
+export const getDaysSvgData = (endDate: Date) => {
   const dataByYear = [];
-  const monthData: MonthData[] = [];
   const firstDate = getFirstCalendarSunday(endDate);
 
   for (let i = 0; i <= TOTAL_WEEKS_PER_YEAR; i++) {
@@ -43,16 +72,6 @@ export const getCalendarData = (endDate: Date = new Date()) => {
     for (let j = 0; j < 7; j++) {
       const currentTs = firstDate.getTime() + (i * 7 + j) * ONE_DAY_IN_MS;
       const currentDate = new Date(currentTs);
-      const currentMonth = currentDate.getMonth();
-
-      const prevProcessedMonth = monthData[monthData.length - 1]?.month;
-      if (j === 0 && prevProcessedMonth !== currentMonth) {
-        monthData.push({
-          month: currentMonth,
-          x: 14 + i * 13,
-          text: MONTH_TEXT[currentMonth],
-        });
-      }
 
       if (endDate.getTime() < currentTs) break;
       dataByWeek.push({
@@ -68,8 +87,12 @@ export const getCalendarData = (endDate: Date = new Date()) => {
     });
   }
 
+  return dataByYear;
+};
+
+export const getCalendarData = (endDate: Date = new Date()) => {
   return {
-    monthData,
-    data: dataByYear,
+    monthData: getMonthLabels(endDate),
+    data: getDaysSvgData(endDate),
   };
 };

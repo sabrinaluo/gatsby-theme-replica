@@ -1,4 +1,8 @@
-import { getCalendarData, getFirstCalendarSunday } from '../calendar';
+import {
+  getDaysSvgData,
+  getFirstCalendarSunday,
+  getMonthLabels,
+} from '../calendar';
 
 const getDateStr = (date: Date) => date.toISOString().slice(0, 10);
 
@@ -19,15 +23,15 @@ describe('getFirstCalendarSunday', () => {
   });
 });
 
-describe('getCalendar', () => {
-  const result = getCalendarData(new Date('2020-09-18'));
+describe('getDaysSvgData', () => {
+  const result = getDaysSvgData(new Date('2020-09-18'));
   it('get correct translateX', () => {
-    expect(result).toHaveProperty('data.0.translateX', 0);
-    expect(result).toHaveProperty('data.20.translateX', 280);
+    expect(result).toHaveProperty('0.translateX', 0);
+    expect(result).toHaveProperty('20.translateX', 280);
   });
 
   it('get correct week data', () => {
-    expect(result).toHaveProperty('data.20.week.2', {
+    expect(result).toHaveProperty('20.week.2', {
       date: '2020-02-04',
       x: -6,
       y: 26,
@@ -35,12 +39,44 @@ describe('getCalendar', () => {
   });
 
   it('get correct last day', () => {
-    const dataLen = result.data.length;
-    const weekLen = result.data[dataLen - 1].week.length;
-    expect(result).toHaveProperty(`data.${dataLen - 1}.week.${weekLen - 1}`, {
+    const dataLen = result.length;
+    const weekLen = result[dataLen - 1].week.length;
+    expect(result).toHaveProperty(`${dataLen - 1}.week.${weekLen - 1}`, {
       date: '2020-09-18',
       x: -38,
       y: 65,
+    });
+  });
+});
+
+describe('getMonthLabels', () => {
+  it('get month label', () => {
+    const result = getMonthLabels(new Date('2020-09-21'));
+    expect(result).toHaveProperty('0', {
+      text: 'Sep',
+      month: 8,
+      x: 14,
+    });
+
+    expect(result).toHaveProperty('1', {
+      text: 'Oct',
+      month: 9,
+      x: 40,
+    });
+
+    expect(result[result.length - 1]).toEqual({
+      text: 'Sep',
+      month: 8,
+      x: 664,
+    });
+  });
+
+  it('avoid overlapping', () => {
+    const result = getMonthLabels(new Date('2020-09-27'));
+    expect(result).toHaveProperty('0', {
+      text: 'Oct',
+      month: 9,
+      x: 27,
     });
   });
 });
