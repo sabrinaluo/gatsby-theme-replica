@@ -5,6 +5,7 @@ export enum PageKey {
   TAGS,
   RSS,
 }
+
 export const navTabs = [
   {
     key: PageKey.HOME,
@@ -13,16 +14,19 @@ export const navTabs = [
   },
   {
     key: PageKey.ARCHIVES,
+    countKey: 'post',
     href: '/archives',
     text: 'Archives',
   },
   {
     key: PageKey.CATEGORIES,
+    countKey: 'category',
     href: '/categories',
     text: 'Categories',
   },
   {
     key: PageKey.TAGS,
+    countKey: 'tag',
     href: '/tags',
     text: 'Tags',
   },

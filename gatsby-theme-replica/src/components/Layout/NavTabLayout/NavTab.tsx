@@ -1,9 +1,9 @@
 import { Link } from 'gatsby';
-import { graphql, useStaticQuery } from 'gatsby';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import { PageKey, navTabs } from '../../../constants/nav';
+import { navTabs } from '../../../constants/nav';
+import useTotal from '../../../hooks/useTotal';
 import { color } from '../../../theme';
 
 const StyledLink = styled(Link)`
@@ -32,31 +32,34 @@ const StyledCount = styled.span`
   margin: 0 8px;
 `;
 
-const NavTab: FC = () => {
-  const data = useStaticQuery(graphql`
-    query NavTabCount {
-      allMdx(filter: { slug: { ne: "README" } }) {
-        totalCount
-      }
-    }
-  `);
+interface Props {
+  className?: string;
+}
 
-  const postCount = data.allMdx.totalCount;
-  const count: Record<any, number> = {
-    [PageKey.ARCHIVES]: postCount,
-  };
+const NavTab: FC<Props> = ({ className }) => {
+  const total = useTotal();
 
   return (
-    <div className={`border-b mt-6 sticky top-0 bg-white flex`}>
+    <div className={`${className} border-b mt-6 sticky top-0 bg-white`}>
       <div className={`page-grid h-12`}>
-        <div className={`hidden md:block md:w-3/12 md:px-4`}> </div>
-        <nav className={`md:w-9/12 px-4 flex items-end overflow-x-scroll`}>
-          {navTabs.map((item) => (
-            <StyledLink key={item.key} to={item.href} activeClassName='active'>
-              {item.text}
-              {count[item.key] && <StyledCount>{count[item.key]}</StyledCount>}
-            </StyledLink>
-          ))}
+        <div className={`hidden md:block md:w-3/12 md:px-4`}></div>
+        <nav
+          className={`md:w-9/12 px-4 flex items-end overflow-x-scroll md:overflow-hidden`}
+        >
+          {navTabs.map((item) => {
+            // @ts-ignore
+            const count = total[item.countKey];
+            return (
+              <StyledLink
+                key={item.key}
+                to={item.href}
+                activeClassName='active'
+              >
+                {item.text}
+                {count !== undefined && <StyledCount>{count}</StyledCount>}
+              </StyledLink>
+            );
+          })}
         </nav>
       </div>
     </div>
