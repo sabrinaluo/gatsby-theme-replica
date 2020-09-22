@@ -77,12 +77,9 @@ const Profile: FC<Props> = () => {
       <div className={`w-full md:w-3/12 md:px-4`}>
         <div className={`flex items-center flex-wrap mb-6 md:mb-0`}>
           <div
-            className={`w-2/12 mr-4 md:mr-0 mt-3px md:w-full md:-mt-8 relative`}
+            className={`w-2/12 mr-4 md:mr-0 mt-3px md:w-full md:-mt-8 relative md:z-20`}
           >
-            <img
-              className={`w-full border rounded-full md:z-50`}
-              src={config.avatar}
-            />
+            <img className={`w-full border rounded-full`} src={config.avatar} />
             <div className={`relative hidden md:block`}>
               <StyledStatusBar
                 className={`absolute px-2 py-1 rounded-full flex items-center ${

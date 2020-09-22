@@ -40,7 +40,7 @@ const NavTab: FC<Props> = ({ className }) => {
   const total = useTotal();
 
   return (
-    <div className={`${className} border-b mt-6 sticky top-0 bg-white`}>
+    <div className={`${className} border-b mt-6 sticky top-0 bg-white z-10`}>
       <div className={`page-grid h-12`}>
         <div className={`hidden md:block md:w-3/12 md:px-4`}></div>
         <nav
