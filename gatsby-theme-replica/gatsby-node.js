@@ -108,9 +108,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const years = result.data.years.group;
   const tags = result.data.tags.group;
   const categories = result.data.categories.group;
-  const totalTags = tags.length;
-  const totalPosts = posts.length;
-  const totalCategories = categories.length;
 
   try {
     years.forEach(({ fieldValue: year }, index) => {
@@ -121,9 +118,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         component: require.resolve('./src/templates/home.tsx'), //todo rename to template/overview
         context: {
           year,
-          totalCategories,
-          totalPosts,
-          totalTags,
         },
       });
     });
