@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 
-import Layout from '../components/Layout';
+import Layout, { LayoutMode } from '../components/Layout';
 
 const CategoryTemplate: FC = () => {
-  return <Layout>category page</Layout>;
+  return <Layout mode={LayoutMode.NavTab}>category page</Layout>;
 };
 
 export default CategoryTemplate;
