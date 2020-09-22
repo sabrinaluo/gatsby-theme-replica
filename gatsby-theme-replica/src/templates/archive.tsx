@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 
 import Layout, { LayoutMode } from '../components/Layout';
 import PostList from '../components/PostList';
+import { PostNode } from '../types/post';
 
 export const query = graphql`
   query PostListQuery {

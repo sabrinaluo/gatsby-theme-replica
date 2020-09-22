@@ -1,3 +1,6 @@
+import { BriefPost, PostNode } from '../types/post';
+import { getDateString } from './date';
+
 const ONE_DAY_IN_MS = 24 * 60 * 60 * 1000;
 const TOTAL_WEEKS_PER_YEAR = 52;
 export const WEEK_DAY_TEXT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -23,8 +26,6 @@ export const getFirstCalendarSunday = (endDate: Date = new Date()) => {
     endDate.getTime() - (TOTAL_WEEKS_PER_YEAR * 7 + day) * ONE_DAY_IN_MS
   );
 };
-
-const getDateStr = (date: Date) => date.toISOString().slice(0, 10);
 
 interface MonthData {
   month: number;
@@ -77,7 +78,7 @@ export const getDaysSvgData = (endDate: Date) => {
       dataByWeek.push({
         x: 14 - i,
         y: j * 13,
-        date: getDateStr(currentDate),
+        date: getDateString(currentDate),
       });
     }
 
@@ -95,4 +96,27 @@ export const getCalendarData = (endDate: Date = new Date()) => {
     monthData: getMonthLabels(endDate),
     data: getDaysSvgData(endDate),
   };
+};
+
+export type DatePostsMap = Record<string, BriefPost[]>;
+
+export const getDatePostsMap = (posts: PostNode[]) => {
+  const map = {} as DatePostsMap;
+  posts?.forEach((post) => {
+    const date = getDateString(post.frontmatter.date);
+    if (!map[date]) {
+      map[date] = [];
+    }
+
+    map[date].push({
+      id: post.id,
+      slug: post.fields.slug,
+      title: post.frontmatter.title,
+      date: post.frontmatter.date,
+      relativeDate: post.frontmatter.relativeDate,
+      formattedDate: post.frontmatter.formattedDate,
+    });
+  });
+
+  return map;
 };

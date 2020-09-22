@@ -6,16 +6,12 @@ import { GrBook, GrDrag } from 'react-icons/gr';
 import styled from 'styled-components';
 
 import { color } from '../theme';
+import { BriefPost } from '../types/post';
 
-export interface Props {
-  id: string;
-  slug: string;
-  title: string;
-  excerpt: string;
-  column?: string;
-  category?: string;
-  tagCount: number;
-}
+interface Props
+  extends Required<
+    Pick<BriefPost, 'id' | 'slug' | 'title' | 'excerpt' | 'tags' | 'category'>
+  > {}
 
 const StyledLink = styled(Link)`
   color: ${color.gray.main};
@@ -31,14 +27,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const PostCard: FC<Props> = ({
-  id,
-  slug,
-  title,
-  excerpt,
-  category,
-  tagCount,
-}) => {
+const PostCard: FC<Props> = ({ id, slug, title, excerpt, category, tags }) => {
   return (
     <div className={`border rounded-md p-4 flex flex-col text-sm`} key={id}>
       <div className={`flex items-center`}>
@@ -55,9 +44,9 @@ const PostCard: FC<Props> = ({
             <FaRegFolderOpen size={16} /> {category}{' '}
           </StyledLink>
         )}
-        {tagCount > 0 && (
+        {tags?.length > 0 && (
           <StyledLink to={`/tag`}>
-            <AiOutlineTags size={16} /> {tagCount}{' '}
+            <AiOutlineTags size={16} /> {tags.length}{' '}
           </StyledLink>
         )}
       </div>

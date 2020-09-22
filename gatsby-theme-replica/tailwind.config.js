@@ -57,10 +57,10 @@ module.exports = {
         '3px': '3px',
         '60px': '60px',
         '64px': '64px',
-        '74px': '74px',
       },
       inset: {
         1: '0.25rem',
+        '74px': '74px',
       },
       listStyleType: {
         circle: 'circle',

@@ -41,7 +41,7 @@ const YearNavBar: FC<Props> = () => {
   };
 
   return (
-    <div className={`flex-col hidden md:flex w-24`}>
+    <div className={`flex-col flex w-24 sticky top-74px`}>
       {new Array(total).fill(0).map((_, index) => (
         <div
           key={index}

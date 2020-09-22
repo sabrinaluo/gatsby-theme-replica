@@ -8,26 +8,12 @@ import AuthorBar from '../components/Article/AuthorBar';
 import Layout from '../components/Layout';
 import TableOfContent from '../components/TableOfContent';
 import Tag from '../components/Tag';
+import { PostNode } from '../types/post';
 
 export interface TocItem {
   url: string;
   title: string;
   items?: TocItem[];
-}
-
-interface PostNode {
-  body: string;
-  info: {
-    title: string;
-    date: string;
-    relativeDate: string;
-    formattedDate: string;
-    tags: string[];
-  };
-  timeToRead: number;
-  tableOfContents: {
-    items?: TocItem[];
-  };
 }
 
 interface Props {
@@ -40,7 +26,13 @@ interface Props {
 }
 
 const PostTemplate: FC<Props> = ({ data, pageContext }) => {
-  const { title, date, relativeDate, tags, formattedDate } = data.post.info;
+  const {
+    title,
+    date,
+    relativeDate,
+    tags,
+    formattedDate,
+  } = data.post.frontmatter;
   const { timeToRead, tableOfContents, body } = data.post;
   const { numericId } = pageContext;
 
@@ -50,7 +42,7 @@ const PostTemplate: FC<Props> = ({ data, pageContext }) => {
         <ArticleTitle
           title={title}
           numericId={numericId}
-          relativeDate={relativeDate}
+          relativeDate={relativeDate as string}
           timeToRead={timeToRead}
         />
         <div className={`w-full md:w-9/12 md:pr-4 md:border-b-0 mb-4`}>
@@ -61,7 +53,10 @@ const PostTemplate: FC<Props> = ({ data, pageContext }) => {
               width={40}
             />
             <div className={`md:ml-14`}>
-              <AuthorBar dateTime={date} formattedDate={formattedDate} />
+              <AuthorBar
+                dateTime={date}
+                formattedDate={formattedDate as string}
+              />
               <ArticleContent body={body} />
             </div>
           </div>
@@ -87,7 +82,7 @@ export const query = graphql`
   query($postID: String!) {
     post: mdx(id: { eq: $postID }) {
       body
-      info: frontmatter {
+      frontmatter {
         relativeDate: date(fromNow: true)
         formattedDate: date(formatString: "MMM d, YYYY")
         date

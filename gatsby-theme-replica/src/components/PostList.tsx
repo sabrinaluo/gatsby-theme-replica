@@ -2,6 +2,7 @@ import { Link } from 'gatsby';
 import React, { FC } from 'react';
 import { FiStar } from 'react-icons/fi';
 
+import { PostNode } from '../types/post';
 import Tag from './Tag';
 
 interface Props {

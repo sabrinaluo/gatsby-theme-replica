@@ -1,24 +1,30 @@
 import {
+  getDatePostsMap,
   getDaysSvgData,
   getFirstCalendarSunday,
   getMonthLabels,
 } from '../calendar';
-
-const getDateStr = (date: Date) => date.toISOString().slice(0, 10);
+import { getDateString } from '../date';
 
 describe('getFirstCalendarSunday', () => {
   it('end day is Sun', () => {
-    const result = getDateStr(getFirstCalendarSunday(new Date('2020-09-20')));
+    const result = getDateString(
+      getFirstCalendarSunday(new Date('2020-09-20'))
+    );
     expect(result).toEqual('2019-09-22');
   });
 
   it('end day is Wed', () => {
-    const result = getDateStr(getFirstCalendarSunday(new Date('2020-09-16')));
+    const result = getDateString(
+      getFirstCalendarSunday(new Date('2020-09-16'))
+    );
     expect(result).toEqual('2019-09-15');
   });
 
   it('end day is Sat', () => {
-    const result = getDateStr(getFirstCalendarSunday(new Date('2020-09-19')));
+    const result = getDateString(
+      getFirstCalendarSunday(new Date('2020-09-19'))
+    );
     expect(result).toEqual('2019-09-15');
   });
 });
@@ -78,5 +84,11 @@ describe('getMonthLabels', () => {
       month: 9,
       x: 27,
     });
+  });
+});
+
+describe('getPostsDateMap', () => {
+  it('s', () => {
+    expect(getDatePostsMap([])).toEqual(1);
   });
 });

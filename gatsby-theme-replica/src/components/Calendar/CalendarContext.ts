@@ -2,7 +2,8 @@ import { Dispatch, createContext } from 'react';
 
 interface CalendarState {
   year: number;
-  date: null | string;
+  date: string;
+  endDate: Date;
 }
 
 interface Action<T, U extends string = string> {
@@ -12,9 +13,11 @@ interface Action<T, U extends string = string> {
 
 type CalendarAction = Action<number, 'year'> | Action<string, 'date'>;
 
+const today = new Date();
 export const initialState: CalendarState = {
-  year: new Date().getFullYear(),
-  date: null,
+  year: today.getFullYear(),
+  endDate: today,
+  date: '',
 };
 
 export const CalendarContext = createContext<{
@@ -31,10 +34,14 @@ export const calendarReducer = (
 ) => {
   switch (action.type) {
     case 'year':
+      const year = action.payload;
+      const endDate =
+        today.getFullYear() === year ? today : new Date(`${year}-12-31`);
       return {
         ...state,
-        date: null,
-        year: action.payload,
+        date: '',
+        year,
+        endDate,
       };
     case 'date':
       return {

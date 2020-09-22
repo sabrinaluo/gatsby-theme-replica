@@ -1,8 +1,10 @@
 import React, { CSSProperties, FC, useContext, useState } from 'react';
 import styled from 'styled-components';
 
+import { useDatePostsMap } from '../../hooks/usePosts';
 import { WEEK_DAY_TEXT, getCalendarData } from '../../utils/calendar';
 import { CalendarContext } from './CalendarContext';
+import CalendarLegend, { legendColors } from './CalendarLegend';
 
 const StyledSvg = styled.svg`
   text {
@@ -47,7 +49,11 @@ interface Props {
 }
 
 const ContributionGraph: FC<Props> = () => {
-  const { data, monthData } = getCalendarData();
+  const { state, dispatch } = useContext(CalendarContext);
+  const datePostsMap = useDatePostsMap();
+
+  const { data, monthData } = getCalendarData(state.endDate);
+
   const [svgTip, setSvgTip] = useState<SvgTipState>({
     style: { display: 'none' },
   });
@@ -79,8 +85,6 @@ const ContributionGraph: FC<Props> = () => {
     setSvgTip({ style: { display: 'none' } });
   };
 
-  const { state, dispatch } = useContext(CalendarContext);
-
   const handleSvgClick = (e: React.MouseEvent<SVGRectElement>) => {
     const target = e.currentTarget;
     const date = target.dataset.date as string;
@@ -107,22 +111,28 @@ const ContributionGraph: FC<Props> = () => {
                 key={col.translateX}
                 transform={`translate(${col.translateX},0)`}
               >
-                {col.week.map((day) => (
-                  <rect
-                    className={getRectOpacity(day.date)}
-                    key={day.date}
-                    width='10'
-                    height='10'
-                    x={day.x}
-                    y={day.y}
-                    fill='#ebedf0'
-                    data-count='0'
-                    data-date={day.date}
-                    onMouseEnter={handleMouseEnterSvg}
-                    onMouseLeave={handleMouseLeaveSvg}
-                    onClick={handleSvgClick}
-                  />
-                ))}
+                {col.week.map((day) => {
+                  const count = datePostsMap[day.date]?.length ?? 0;
+                  const fillColor =
+                    legendColors[count] ?? legendColors.slice(-1);
+
+                  return (
+                    <rect
+                      className={getRectOpacity(day.date)}
+                      key={day.date}
+                      width='10'
+                      height='10'
+                      x={day.x}
+                      y={day.y}
+                      fill={fillColor}
+                      data-date={day.date}
+                      data-count={count}
+                      onMouseEnter={handleMouseEnterSvg}
+                      onMouseLeave={handleMouseLeaveSvg}
+                      onClick={handleSvgClick}
+                    />
+                  );
+                })}
               </g>
             ))}
 
@@ -142,18 +152,12 @@ const ContributionGraph: FC<Props> = () => {
         <a>Learn how we count contributions.</a>
         <div className={`self-end text-gray-main items-center flex`}>
           Less
-          <ul className={`calendar-legend`}>
-            <li className={`bg-gray-120`} />
-            <li className={`bg-green-superlight`} />
-            <li className={`bg-green-light`} />
-            <li className={`bg-green-medium`} />
-            <li className={`bg-green-dark`} />
-          </ul>
+          <CalendarLegend />
           More
         </div>
       </div>
       <div
-        className={`absolute bg-gray-dark text-gray-light text-xs opacity-75 rounded-md p-2`}
+        className={`absolute bg-gray-dark text-gray-light text-xs opacity-75 rounded-md p-2 whitespace-no-wrap`}
         style={svgTip.style}
       >
         <strong>{svgTip.text}</strong>on {svgTip.date}
