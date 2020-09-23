@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { FiStar } from 'react-icons/fi';
 
 import { PostNode } from '../types/post';
+import { getDateString } from '../utils/date';
 import Tag from './Tag';
 
 interface Props {
@@ -25,7 +26,10 @@ const PostList: FC<Props> = ({ posts }) => {
               )}
             </div>
             <div className='text-xs text-gray-main'>
-              Updated <time>{post.frontmatter.date}</time>
+              Posted on{' '}
+              <time data-date={post.frontmatter.date}>
+                {getDateString(post.frontmatter.date)}
+              </time>
             </div>
           </div>
           <div className='w-2/12 flex items-center justify-end'>
