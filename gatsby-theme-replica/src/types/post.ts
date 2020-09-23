@@ -9,8 +9,6 @@ export interface PostNode {
     title: string;
     tags: string[];
     category: string;
-    relativeDate?: string;
-    formattedDate?: string;
   };
   fields: {
     slug: string;

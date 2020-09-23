@@ -14,7 +14,6 @@ const usePostNodes = () =>
           }
           frontmatter {
             date
-            formattedDate: date(formatString: "MMM d")
             title
           }
         }

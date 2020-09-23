@@ -1,5 +1,5 @@
 import { BriefPost, PostNode } from '../types/post';
-import { getDateString } from './date';
+import { getDateString, getRelativeTimeFromNow } from './date';
 
 const ONE_DAY_IN_MS = 24 * 60 * 60 * 1000;
 const TOTAL_WEEKS_PER_YEAR = 52;
@@ -113,8 +113,7 @@ export const getDatePostsMap = (posts: PostNode[]) => {
       slug: post.fields.slug,
       title: post.frontmatter.title,
       date: post.frontmatter.date,
-      relativeDate: post.frontmatter.relativeDate,
-      formattedDate: post.frontmatter.formattedDate,
+      relativeDate: getRelativeTimeFromNow(post.frontmatter.date),
     });
   });
 

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { color } from '../../theme';
 import { BriefPost } from '../../types/post';
+import { format } from '../../utils/date';
 
 const StyledWrapper = styled.ul`
   display: block;
@@ -29,7 +30,7 @@ const ActivityTimeline: FC<Props> = ({ posts }) => {
             date-time={post.date}
             title={post.date}
           >
-            {post.formattedDate}
+            {format(post.date)}
           </time>
         </li>
       ))}

@@ -1,5 +1,6 @@
 import { graphql } from 'gatsby';
 import React, { FC } from 'react';
+import { Helmet } from 'react-helmet';
 
 import config from '../../_config';
 import ArticleContent from '../components/Article/ArticleContent';
@@ -9,6 +10,7 @@ import Layout from '../components/Layout';
 import TableOfContent from '../components/TableOfContent';
 import Tag from '../components/Tag';
 import { PostNode } from '../types/post';
+import { format, getRelativeTimeFromNow } from '../utils/date';
 
 export interface TocItem {
   url: string;
@@ -26,23 +28,27 @@ interface Props {
 }
 
 const PostTemplate: FC<Props> = ({ data, pageContext }) => {
-  const {
-    title,
-    date,
-    relativeDate,
-    tags,
-    formattedDate,
-  } = data.post.frontmatter;
+  const { title, date, tags } = data.post.frontmatter;
   const { timeToRead, tableOfContents, body } = data.post;
   const { numericId } = pageContext;
+  const { slug } = data.post.fields;
+
+  const relativeDate = getRelativeTimeFromNow(date);
+  const formattedDate = format(date);
 
   return (
     <Layout>
+      <Helmet>
+        <title>
+          {title} - {config.siteName}
+        </title>
+        <link rel='canonical' href={slug} />
+      </Helmet>
       <div className={`page-grid mt-4 md:px-8`}>
         <ArticleTitle
           title={title}
           numericId={numericId}
-          relativeDate={relativeDate as string}
+          relativeDate={relativeDate}
           timeToRead={timeToRead}
         />
         <div className={`w-full md:w-9/12 md:pr-4 md:border-b-0 mb-4`}>
@@ -53,10 +59,7 @@ const PostTemplate: FC<Props> = ({ data, pageContext }) => {
               width={40}
             />
             <div className={`md:ml-14`}>
-              <AuthorBar
-                dateTime={date}
-                formattedDate={formattedDate as string}
-              />
+              <AuthorBar dateTime={date} formattedDate={formattedDate} />
               <ArticleContent body={body} />
             </div>
           </div>
@@ -82,16 +85,16 @@ export const query = graphql`
   query($postID: String!) {
     post: mdx(id: { eq: $postID }) {
       body
+      fields {
+        slug
+      }
       frontmatter {
-        relativeDate: date(fromNow: true)
-        formattedDate: date(formatString: "MMM d, YYYY")
         date
         title
         tags
       }
       tableOfContents(maxDepth: 3)
       timeToRead
-      slug
     }
   }
 `;
