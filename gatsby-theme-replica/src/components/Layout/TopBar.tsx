@@ -6,7 +6,7 @@ import { IoIosAdd, IoIosNotificationsOutline } from 'react-icons/io';
 import { RiArrowDropDownFill } from 'react-icons/ri';
 
 import config from '../../../_config';
-import { navTabs } from '../../constants/nav';
+import NavList from './NavList';
 
 const TopBar: FC = () => (
   <div
@@ -22,17 +22,10 @@ const TopBar: FC = () => (
 
     <div className={`hidden md:flex items-center flex-grow px-4`}>
       <input className={`w-64 focus:w-1/2`} />
-      <div className={`flex ml-2 text-sm font-semibold`}>
-        {navTabs.map((item) => (
-          <Link
-            key={item.text}
-            to={item.href}
-            className={`mx-2 py-4 text-white hover:no-underline hover:text-opacity-75`}
-          >
-            {item.text}
-          </Link>
-        ))}
-      </div>
+      <NavList
+        className={`flex ml-2 text-sm font-semibold`}
+        itemClassName={`mx-2 py-4 text-white hover:no-underline hover:text-opacity-75`}
+      />
     </div>
     <ul className={`flex items-center text-white font-semibold`}>
       <li>

@@ -32,7 +32,8 @@ export const navTabs = [
   },
   {
     key: PageKey.RSS,
-    href: '/rss',
+    href: '/rss.xml',
     text: 'RSS',
+    openInNewTab: true,
   },
 ];
