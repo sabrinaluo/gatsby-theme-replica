@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "yarn workspace example build",
+    "serve": "yarn workspace example serve",
     "dev": "yarn workspace example develop",
     "clean": "yarn workspace example clean",
     "eslint": "eslint --ext .js,.jsx,.ts,.tsx .",
