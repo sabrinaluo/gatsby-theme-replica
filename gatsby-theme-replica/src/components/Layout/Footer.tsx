@@ -51,7 +51,7 @@ const Footer: FC = () => (
         <span className={`text-hotpink`}>♥</span> Powered by Gatsby
       </div>
     </div>
-    {config.flagCounter && (
+    {process.env.NODE_ENV === 'production' && config.flagCounter && (
       <div className={`page-grid flex justify-center mt-4`}>
         <a
           href={config.flagCounter.url}
