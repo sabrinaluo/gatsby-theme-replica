@@ -127,12 +127,30 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   try {
     posts.forEach((post, index) => {
+      const prev = posts[index - 1];
+      const next = posts[index + 1];
+      const prevPost = prev
+        ? {
+            slug: prev.fields.slug,
+            title: prev.frontmatter.title,
+          }
+        : null;
+
+      const nextPost = next
+        ? {
+            slug: next.fields.slug,
+            title: next.frontmatter.title,
+          }
+        : null;
+
       actions.createPage({
         path: `${prefix}${post.fields.slug}`,
         component: require.resolve('./src/templates/post.tsx'),
         context: {
           postID: post.id,
           numericId: index + 1,
+          prevPost,
+          nextPost,
         },
       });
     });

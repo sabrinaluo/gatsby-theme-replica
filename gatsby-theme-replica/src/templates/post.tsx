@@ -1,4 +1,5 @@
 import { graphql } from 'gatsby';
+import { Link } from 'gatsby';
 import React, { FC } from 'react';
 import { Helmet } from 'react-helmet';
 
@@ -18,9 +19,15 @@ export interface TocItem {
   items?: TocItem[];
 }
 
+interface RelatedPost {
+  slug: string;
+  title: string;
+}
 interface Props {
   pageContext: {
     numericId: number;
+    prevPost?: RelatedPost;
+    nextPost?: RelatedPost;
   };
   data: {
     post: PostNode;
@@ -30,7 +37,7 @@ interface Props {
 const PostTemplate: FC<Props> = ({ data, pageContext }) => {
   const { title, date, tags } = data.post.frontmatter;
   const { timeToRead, tableOfContents, body } = data.post;
-  const { numericId } = pageContext;
+  const { numericId, prevPost, nextPost } = pageContext;
   const { slug } = data.post.fields;
 
   const relativeDate = getRelativeTimeFromNow(date);
@@ -62,6 +69,22 @@ const PostTemplate: FC<Props> = ({ data, pageContext }) => {
               <AuthorBar dateTime={date} formattedDate={formattedDate} />
               <ArticleContent body={body} />
             </div>
+          </div>
+          <div
+            className={`flex py-2 text-xs flex-wrap justify-between items-center ml:0 md:ml-14`}
+          >
+            {prevPost && (
+              <div>
+                <span className={`mr-1 text-gray-medium`}>←</span>
+                <Link to={prevPost.slug}> {prevPost.title}</Link>
+              </div>
+            )}
+            {nextPost && (
+              <div>
+                <Link to={nextPost.slug}>{nextPost.title}</Link>
+                <span className={`ml-1 text-gray-medium`}>→</span>
+              </div>
+            )}
           </div>
         </div>
         <div className={`w-full md:w-3/12 md:pl-4`}>
