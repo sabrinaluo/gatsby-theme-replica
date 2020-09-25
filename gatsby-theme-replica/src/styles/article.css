@@ -173,3 +173,8 @@ article > kbd {
   border-radius: 3px;
   box-shadow: inset 0 -1px 0 #959da5;
 }
+
+ /* FIXME prism last line always empty */
+article .prism-code .token-line:last-child {
+  height: 0;
+}
