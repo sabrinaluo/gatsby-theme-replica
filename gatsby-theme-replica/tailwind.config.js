@@ -1,6 +1,9 @@
 const path = require('path');
 
 const colors = {
+  fade:{
+    white15:'hsla(0,0%,100%,.15)'
+  },
   gray: {
     50: '#fafbfc',
     100: '#f6f8fa',
