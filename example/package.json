@@ -7,11 +7,12 @@
     "develop": "gatsby develop",
     "serve": "gatsby serve",
     "build": "gatsby build",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "serve": "gatsby serve"
   },
   "dependencies": {
     "gatsby": "^2.24.63",
-    "gatsby-theme-replica": "^1.0.0",
+    "gatsby-theme-replica": "^0.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "ts-node": "^9.0.0"
