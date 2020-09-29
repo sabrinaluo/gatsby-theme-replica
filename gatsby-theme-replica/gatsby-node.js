@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { createFilePath } = require(`gatsby-source-filesystem`);
 require('ts-node').register({ files: true });
-const utils = require('./setting/utils');
+const { slugify } = require('./src/utils/slugify');
 
 const DEFAULT_CONTENT_PATH = 'content';
 
@@ -35,12 +35,20 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 
 const pages = [
   {
+    path: '',
+    template: 'home',
+  },
+  {
     path: 'categories',
-    component: 'category',
+    template: 'categories',
   },
   {
     path: 'archives',
-    component: 'archive',
+    template: 'archive',
+  },
+  {
+    path: 'tags',
+    template: 'tags',
   },
 ];
 
@@ -63,6 +71,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           fields {
             slug
           }
+          frontmatter {
+            title
+          }
         }
       }
 
@@ -81,12 +92,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           fieldValue
         }
       }
-
-      years: allMdx {
-        group(field: fields___year) {
-          fieldValue
-        }
-      }
     }
   `);
 
@@ -100,30 +105,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   pages.forEach((page) => {
     actions.createPage({
       path: `${prefix}/${page.path}`,
-      component: require.resolve(`./src/templates/${page.component}.tsx`),
+      component: require.resolve(`./src/templates/${page.template}.tsx`),
     });
   });
 
   const posts = result.data.allMdx.nodes;
-  const years = result.data.years.group;
   const tags = result.data.tags.group;
   const categories = result.data.categories.group;
-
-  try {
-    years.forEach(({ fieldValue: year }, index) => {
-      actions.createPage({
-        path: `${prefix}${
-          index === years.length - 1 ? '/' : `/overview/${year}`
-        }`,
-        component: require.resolve('./src/templates/home.tsx'), //todo rename to template/overview
-        context: {
-          year,
-        },
-      });
-    });
-  } catch (e) {
-    console.error(e);
-  }
 
   try {
     posts.forEach((post, index) => {
@@ -158,12 +146,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     console.error(e);
   }
 
+  // todo ignore case
   try {
     tags.forEach((o) => {
-      const slug = utils.slugify(o.fieldValue);
+      const slug = slugify(o.fieldValue);
       actions.createPage({
         path: `${prefix}/tag/${slug}`,
-        component: require.resolve('./src/templates/category.tsx'),
+        component: require.resolve('./src/templates/tag.tsx'),
         context: {
           tag: o.fieldValue,
         },
@@ -173,9 +162,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     console.error(e);
   }
 
+  // todo ignore case
   try {
     categories.forEach((o) => {
-      const slug = utils.slugify(o.fieldValue);
+      const slug = slugify(o.fieldValue);
       actions.createPage({
         path: `${prefix}/category/${slug}`,
         component: require.resolve('./src/templates/category.tsx'),

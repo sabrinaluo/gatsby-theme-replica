@@ -3,15 +3,13 @@ import React, { FC } from 'react';
 
 import Layout, { LayoutMode } from '../components/Layout';
 import PostList from '../components/PostList';
+import Tag from '../components/Tag';
 import { PostNode } from '../types/post';
 
 export const query = graphql`
-  query CategoryPostsQuery($category: String!) {
+  query TagPostsQuery($tag: String!) {
     allMdx(
-      filter: {
-        slug: { ne: "README" }
-        frontmatter: { category: { eq: $category } }
-      }
+      filter: { slug: { ne: "README" }, frontmatter: { tags: { eq: $tag } } }
       sort: { order: DESC, fields: frontmatter___date }
     ) {
       nodes {
@@ -33,7 +31,7 @@ export const query = graphql`
 
 interface Props {
   pageContext: {
-    category: string;
+    tag: string;
   };
   data: {
     allMdx: {
@@ -42,15 +40,17 @@ interface Props {
   };
 }
 
-const CategoryTemplate: FC<Props> = ({ data, pageContext }) => {
+const TagTemplate: FC<Props> = ({ pageContext, data }) => {
+  const { tag } = pageContext;
   const posts = data.allMdx.nodes;
-  const { category } = pageContext;
   return (
     <Layout mode={LayoutMode.NavTab}>
-      <div>{category}</div>
+      <div>
+        <Tag tag={tag} />
+      </div>
       <PostList posts={posts} />
     </Layout>
   );
 };
 
-export default CategoryTemplate;
+export default TagTemplate;
