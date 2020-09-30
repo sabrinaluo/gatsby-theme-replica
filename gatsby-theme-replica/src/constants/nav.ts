@@ -21,13 +21,13 @@ export const navTabs = [
   {
     key: PageKey.CATEGORIES,
     countKey: 'category',
-    href: '/categories',
+    href: '/category',
     text: 'Categories',
   },
   {
     key: PageKey.TAGS,
     countKey: 'tag',
-    href: '/tags',
+    href: '/tag',
     text: 'Tags',
   },
   {

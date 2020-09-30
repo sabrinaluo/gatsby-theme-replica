@@ -39,7 +39,7 @@ const pages = [
     template: 'home',
   },
   {
-    path: 'categories',
+    path: 'category',
     template: 'categories',
   },
   {
@@ -47,7 +47,7 @@ const pages = [
     template: 'archive',
   },
   {
-    path: 'tags',
+    path: 'tag',
     template: 'tags',
   },
 ];
