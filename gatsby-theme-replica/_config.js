@@ -2,6 +2,9 @@ const config = {
   siteName: `It's HiiTea Time!`,
   author: 'HiiTea',
   bio: 'this bio bio bio bio',
+  location: 'Earth',
+  email: 'hi@hiitea.io',
+  link: 'https://hiitea.io',
   avatar:
     'https://avatars2.githubusercontent.com/u/5300359?s=460&u=ad93a82d45a91c8f6e70ec438d788c7e873ef6b5&v=4',
   status: {

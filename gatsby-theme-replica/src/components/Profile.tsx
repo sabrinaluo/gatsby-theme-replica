@@ -47,6 +47,8 @@ const StyledIconList = styled.ul`
 
     svg {
       margin-right: 4px;
+      color: ${color.gray[300]};
+      font-size: 16px;
     }
 
     > a {
@@ -99,11 +101,9 @@ const Profile: FC<Props> = () => {
           </div>
           <div className={`w-auto md:w-full md:py-4`}>
             <div className={`text-26px font-semibold leading-tight`}>
-              {' '}
               {config.siteName}
             </div>
             <div className={`text-lg text-gray-main font-light`}>
-              {' '}
               {config.author}
             </div>
           </div>
@@ -118,7 +118,7 @@ const Profile: FC<Props> = () => {
         <div className={`w-full mb-4`}> {config.bio}</div>
 
         <div className={`flex flex-col text-sm`}>
-          <StyledIconList className={`flex flex-row order-1`}>
+          <StyledIconList className={`flex flex-row order-1 mb-0 md:mb-4`}>
             <li>
               <Link to={`/archives`}>
                 <GrBook />
@@ -141,15 +141,17 @@ const Profile: FC<Props> = () => {
           <StyledIconList className={`flex flex-col md:order-1`}>
             <li>
               <GrLocation />
-              <div>location</div>
+              <div>{config.location}</div>
             </li>
             <li>
               <AiOutlineMail />
-              <div>email</div>
+              <a href={`mailto:${config.email}`}>{config.email}</a>
             </li>
             <li>
               <BiLink />
-              <div>link</div>
+              <a href={config.link} target='_blank'>
+                {config.link}
+              </a>
             </li>
           </StyledIconList>
         </div>
