@@ -126,12 +126,12 @@ const Profile: FC<Props> = () => {
               </Link>
             </li>
             <li>
-              <Link to={'/categories'}>
+              <Link to={'/category'}>
                 <strong>{total.category}</strong> categories
               </Link>
             </li>
             <li>
-              <Link to={`/tags`}>
+              <Link to={`/tag`}>
                 <AiOutlineTags />
                 <strong>{total.tag}</strong>
               </Link>
