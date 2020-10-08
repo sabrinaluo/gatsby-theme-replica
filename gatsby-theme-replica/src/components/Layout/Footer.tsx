@@ -21,6 +21,9 @@ const Footer: FC = () => (
       <ul
         className={`flex flex-wrap justify-between w-full md:w-5/12 md:justify-start -mx-2 md:-mx-4`}
       >
+        <li className={`mx-2 md:mx-4`}>
+          © {new Date().getFullYear()} {config.author}
+        </li>
         {config.footerList?.map((o) => (
           <li className={`mx-2 md:mx-4`} key={o.text}>
             {o.link ? (

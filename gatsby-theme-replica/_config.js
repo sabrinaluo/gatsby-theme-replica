@@ -15,7 +15,6 @@ const config = {
     isBusy: true,
   },
   footerList: [
-    { text: `© ${new Date().getFullYear()} Hiitea` },
     {
       text: 'Home',
       link: '/',
