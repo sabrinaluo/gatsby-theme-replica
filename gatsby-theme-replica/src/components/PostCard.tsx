@@ -7,6 +7,7 @@ import styled from 'styled-components';
 
 import { color } from '../theme';
 import { BriefPost } from '../types/post';
+import { slugify } from '../utils/slugify';
 
 interface Props
   extends Required<
@@ -40,8 +41,8 @@ const PostCard: FC<Props> = ({ id, slug, title, excerpt, category, tags }) => {
       <div className={`flex-grow mt-2 mb-4 text-gray-main`}>{excerpt}</div>
       <div className={`flex items-center`}>
         {category && (
-          <StyledLink to={`/category/${category}`}>
-            <FaRegFolderOpen size={16} /> {category}{' '}
+          <StyledLink to={`/category/${slugify(category)}`}>
+            <FaRegFolderOpen size={16} /> {category}
           </StyledLink>
         )}
         {tags?.length > 0 && (

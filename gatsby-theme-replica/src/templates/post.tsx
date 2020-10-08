@@ -2,6 +2,7 @@ import { graphql } from 'gatsby';
 import { Link } from 'gatsby';
 import React, { FC } from 'react';
 import { Helmet } from 'react-helmet';
+import { FaRegFolderOpen } from 'react-icons/fa';
 
 import config from '../../_config';
 import ArticleContent from '../components/Article/ArticleContent';
@@ -12,6 +13,7 @@ import TableOfContent from '../components/TableOfContent';
 import Tag from '../components/Tag';
 import { PostNode } from '../types/post';
 import { format, getRelativeTimeFromNow } from '../utils/date';
+import { slugify } from '../utils/slugify';
 
 export interface TocItem {
   url: string;
@@ -35,7 +37,7 @@ interface Props {
 }
 
 const PostTemplate: FC<Props> = ({ data, pageContext }) => {
-  const { title, date, tags } = data.post.frontmatter;
+  const { title, date, tags, category } = data.post.frontmatter;
   const { timeToRead, tableOfContents, body, excerpt } = data.post;
   const { numericId, prevPost, nextPost } = pageContext;
   const { slug } = data.post.fields;
@@ -98,6 +100,15 @@ const PostTemplate: FC<Props> = ({ data, pageContext }) => {
         <div className={`w-full md:w-3/12 md:pl-4`}>
           <div className={`pb-4 border-b`}>
             <h2 className={`mb-4 font-medium`}>About</h2>
+            {category && (
+              <Link
+                to={`/category/${slugify(category)}`}
+                className={`flex items-center text-gray-medium hover:text-blue hover:no-underline mb-4`}
+              >
+                <FaRegFolderOpen />
+                <span className={`ml-3 text-sm`}>{category}</span>
+              </Link>
+            )}
             <div>{tags.map((tag) => tag && <Tag tag={tag} key={tag} />)}</div>
           </div>
           {tableOfContents.items && (
@@ -124,6 +135,7 @@ export const query = graphql`
         date
         title
         tags
+        category
       }
       tableOfContents(maxDepth: 3)
       timeToRead
