@@ -1,5 +1,7 @@
 const config = {
+  siteUrl: 'https://hiitea.io', // no tailing slash
   siteName: `It's HiiTea Time!`,
+  description: "Hiitea's tech blog for web development knowledge sharing",
   author: 'HiiTea',
   bio: 'this bio bio bio bio',
   location: 'Earth',

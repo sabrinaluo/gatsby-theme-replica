@@ -1,14 +1,17 @@
 import React, { FC } from 'react';
 import { Helmet } from 'react-helmet';
 
+import config from '../../../_config';
 import Footer from './Footer';
 import TopBar from './TopBar';
 
 const BaseLayout: FC = ({ children }) => (
   <div className={`flex flex-col w-full min-h-screen`}>
     <Helmet>
-      <title>My Title</title>
-      <link rel='canonical' href='http://mysite.com/example' />
+      <title>{config.siteName}</title>
+      <meta name='description' content={config.description} />
+      <meta name='author' content={config.author} />
+      <link rel='canonical' href={config.siteUrl} />
     </Helmet>
     <TopBar />
     {children}

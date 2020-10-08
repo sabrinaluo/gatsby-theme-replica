@@ -36,7 +36,7 @@ interface Props {
 
 const PostTemplate: FC<Props> = ({ data, pageContext }) => {
   const { title, date, tags } = data.post.frontmatter;
-  const { timeToRead, tableOfContents, body } = data.post;
+  const { timeToRead, tableOfContents, body, excerpt } = data.post;
   const { numericId, prevPost, nextPost } = pageContext;
   const { slug } = data.post.fields;
 
@@ -45,6 +45,14 @@ const PostTemplate: FC<Props> = ({ data, pageContext }) => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>
+          {title} - {config.siteName}
+        </title>
+        <meta name='description' content={excerpt} />
+        {tags.length > 0 && <meta name='keywords' content={tags.join(',')} />}
+        <link rel='canonical' href={`${config.siteUrl}/${slug}`} />
+      </Helmet>
       <Helmet>
         <title>
           {title} - {config.siteName}
@@ -108,6 +116,7 @@ export const query = graphql`
   query($postID: String!) {
     post: mdx(id: { eq: $postID }) {
       body
+      excerpt(pruneLength: 100)
       fields {
         slug
       }
