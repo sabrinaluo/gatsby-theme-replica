@@ -5,6 +5,9 @@ import Highlight, { defaultProps } from 'prism-react-renderer';
 import githubTheme from 'prism-react-renderer/themes/github';
 import React from 'react';
 
+import Gist from './src/components/plugin/Gist';
+import JsFiddle from './src/components/plugin/JsFiddle';
+
 // todo sanitize id
 const getHeadingWithId = () => {
   return new Array(6).fill(0).reduce((acc, _, index) => {
@@ -20,6 +23,14 @@ const getHeadingWithId = () => {
 
 const component = {
   ...getHeadingWithId(),
+  a: (props) => {
+    if (/https?:\/\/jsfiddle\.net\/\w+\/\w+/.test(props.href)) {
+      return <JsFiddle src={props.href} />;
+    } else if (/https?:\/\/gist\.github\.com/.test(props.href)) {
+      return <Gist src={props.href} />;
+    }
+    return <a {...props} />;
+  },
   pre: (props) => {
     const className = props.children.props.className || '';
     const matches = className.match(/language-(?<lang>.*)/);
