@@ -2,10 +2,10 @@
 title: Markdown Typography
 date: 2020-04-04 13:45:10
 tags: [typography, style, markdown, md]
-category: cat1
+category: category 1
 ---
 
-# h1
+# heading - h1
 
 ## h2
 
@@ -53,7 +53,19 @@ image
 | tr  | td  |  td |
 | tr  | td  |  td |
 
+# code block
+
 ```js
 // code block
 console.log('hello world!');
 ```
+
+## 3rd party code
+
+### jsfiddle block
+
+https://jsfiddle.net/HiiTea/ac2j48Ln/3/embedded/result,html,css
+
+### gist block
+
+https://gist.github.com/sabrinaluo/1990a3f5ab6df31b8b82e41a4a399505
