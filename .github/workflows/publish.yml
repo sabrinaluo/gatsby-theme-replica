@@ -1,0 +1,21 @@
+on:
+  push:
+    branches:
+      - development
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Bump version
+        run: |
+          cd ./gatsby-theme-replica
+          npm version prerelease --preid=$(git rev-parse --short ${GITHUB_SHA})
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: ./gatsby-theme-replica/package.json
+          tag: "next"
