@@ -7,15 +7,18 @@ import React from 'react';
 
 import Gist from './src/components/plugin/Gist';
 import JsFiddle from './src/components/plugin/JsFiddle';
+import getHeadingInnerText from './src/utils/getHeadingInnerText';
+import { slugify } from './src/utils/slugify';
 
-// todo sanitize id
 const getHeadingWithId = () => {
   return new Array(6).fill(0).reduce((acc, _, index) => {
     const Comp = `h${index + 1}`;
     return {
       ...acc,
       [Comp]: (props) => {
-        return <Comp id={props.children} {...props} />;
+        return (
+          <Comp id={slugify(getHeadingInnerText(props.children))} {...props} />
+        );
       },
     };
   }, {});
