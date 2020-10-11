@@ -6,7 +6,7 @@ import PostList from '../components/PostList';
 import { PostNode } from '../types/post';
 
 export const query = graphql`
-  query CategoryPostsQuery($category: String!) {
+  query CategoryPostsQuery($category: String) {
     allMdx(
       filter: {
         slug: { ne: "README" }

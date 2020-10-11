@@ -1,7 +1,8 @@
 import { Link, graphql } from 'gatsby';
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 
 import Layout, { LayoutMode } from '../components/Layout';
+import { UNCATEGORIZED } from '../constants/key';
 import { slugify } from '../utils/slugify';
 
 export const query = graphql`
@@ -30,15 +31,19 @@ interface Props {
 
 const CategoriesTemplate: FC<Props> = ({ data }) => {
   // todo allow sort by alphabet & count
-  // todo category slugify
-  const categories = Object.entries(
-    data.allMdx.nodes.reduce<Record<string, number>>((acc, posts) => {
-      const category = posts.frontmatter.category;
-      const count = acc[category] || 0;
-      acc[category] = count + 1;
-      return acc;
-    }, {})
+  const categories = useMemo(
+    () =>
+      Object.entries(
+        data.allMdx.nodes.reduce<Record<string, number>>((acc, posts) => {
+          const category = posts.frontmatter.category || UNCATEGORIZED;
+          const count = acc[category] || 0;
+          acc[category] = count + 1;
+          return acc;
+        }, {})
+      ),
+    []
   );
+
   return (
     <Layout mode={LayoutMode.NavTab}>
       <ul>

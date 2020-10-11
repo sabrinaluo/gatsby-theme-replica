@@ -2,7 +2,7 @@ const fs = require('fs');
 const { createFilePath } = require(`gatsby-source-filesystem`);
 require('ts-node').register({ files: true });
 const { slugify } = require('./src/utils/slugify');
-
+const { UNCATEGORIZED } = require('./src/constants/key');
 const DEFAULT_CONTENT_PATH = 'content';
 
 // Make sure the content directory exists
@@ -92,6 +92,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           fieldValue
         }
       }
+      uncategorized: allMdx(
+        filter: { frontmatter: { category: { eq: null } } }
+      ) {
+        totalCount
+      }
     }
   `);
 
@@ -112,6 +117,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const posts = result.data.allMdx.nodes;
   const tags = result.data.tags.group;
   const categories = result.data.categories.group;
+  const uncategorized = result.data.uncategorized;
 
   try {
     posts.forEach((post, index) => {
@@ -174,6 +180,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         },
       });
     });
+
+    if (uncategorized.totalCount > 0) {
+      actions.createPage({
+        path: `${prefix}/category/${UNCATEGORIZED}`,
+        component: require.resolve('./src/templates/category.tsx'),
+        context: {
+          category: null,
+        },
+      });
+    }
   } catch (e) {
     console.error(e);
   }
