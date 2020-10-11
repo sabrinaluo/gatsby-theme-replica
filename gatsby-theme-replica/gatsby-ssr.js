@@ -1,9 +1,3 @@
-exports.onRenderBody = ({ setBodyAttributes }) => {
-  setBodyAttributes({
-    className: 'theme-replica',
-  });
-};
+import commonWrapPageElement from './_gatsby/wrapPageElement';
 
-exports.wrapPageElement = ({ element }) => {
-  return element;
-};
+export const wrapPageElement = commonWrapPageElement;
