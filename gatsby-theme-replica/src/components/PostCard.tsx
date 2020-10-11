@@ -45,7 +45,7 @@ const PostCard: FC<Props> = ({ id, slug, title, excerpt, category, tags }) => {
             <FaRegFolderOpen size={16} /> {category}
           </StyledLink>
         )}
-        {tags?.length > 0 && (
+        {tags && tags.length > 0 && (
           <StyledLink to={`/tag`}>
             <AiOutlineTags size={16} /> {tags.length}{' '}
           </StyledLink>

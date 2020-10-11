@@ -7,8 +7,8 @@ export interface PostNode {
   frontmatter: {
     date: string;
     title: string;
-    tags: string[];
-    category: string;
+    tags: string[] | null;
+    category: string | null;
   };
   fields: {
     slug: string;
@@ -28,8 +28,8 @@ export interface BriefPost {
   excerpt?: string;
   date: string;
   title: string;
-  tags?: string[];
-  category?: string;
+  tags?: string[] | null;
+  category?: string | null;
   relativeDate?: string;
   formattedDate?: string;
   slug: string;

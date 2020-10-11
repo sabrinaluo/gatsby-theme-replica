@@ -30,11 +30,11 @@ interface Props {
 
 const TagsTemplate: FC<Props> = ({ data }) => {
   // todo allow sort by alphabet & count
-  // todo tag slugify
+  // lower case
   const tags = Object.entries(
     data.allMdx.nodes.reduce<Record<string, number>>((acc, posts) => {
       const tags = posts.frontmatter.tags;
-      tags.forEach((tag) => {
+      tags?.forEach((tag) => {
         const count = acc[tag] || 0;
         acc[tag] = count + 1;
       });

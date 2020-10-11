@@ -52,7 +52,9 @@ const PostTemplate: FC<Props> = ({ data, pageContext }) => {
           {title} - {config.siteName}
         </title>
         <meta name='description' content={excerpt} />
-        {tags.length > 0 && <meta name='keywords' content={tags.join(',')} />}
+        {tags && tags.length > 0 && (
+          <meta name='keywords' content={tags.join(',')} />
+        )}
         <link rel='canonical' href={`${config.siteUrl}/${slug}`} />
       </Helmet>
       <Helmet>
@@ -109,7 +111,9 @@ const PostTemplate: FC<Props> = ({ data, pageContext }) => {
                 <span className={`ml-3 text-sm`}>{category}</span>
               </Link>
             )}
-            <div>{tags.map((tag) => tag && <Tag tag={tag} key={tag} />)}</div>
+            {tags && tags.length > 0 && (
+              <div>{tags.map((tag) => tag && <Tag tag={tag} key={tag} />)}</div>
+            )}
           </div>
           {tableOfContents.items && (
             <div className={`pb-4 border-b sticky top-0`}>
