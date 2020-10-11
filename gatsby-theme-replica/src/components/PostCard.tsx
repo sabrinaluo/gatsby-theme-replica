@@ -47,7 +47,8 @@ const PostCard: FC<Props> = ({ id, slug, title, excerpt, category, tags }) => {
         )}
         {tags && tags.length > 0 && (
           <StyledLink to={`/tag`}>
-            <AiOutlineTags size={16} /> {tags.length}{' '}
+            <AiOutlineTags size={16} />
+            {tags.length}
           </StyledLink>
         )}
       </div>
