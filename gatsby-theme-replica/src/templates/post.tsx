@@ -1,5 +1,6 @@
 import { graphql } from 'gatsby';
 import { Link } from 'gatsby';
+import { Disqus } from 'gatsby-plugin-disqus';
 import React, { FC } from 'react';
 import { Helmet } from 'react-helmet';
 import { FaRegFolderOpen } from 'react-icons/fa';
@@ -11,6 +12,7 @@ import AuthorBar from '../components/Article/AuthorBar';
 import Layout from '../components/Layout';
 import TableOfContent from '../components/TableOfContent';
 import Tag from '../components/Tag';
+import useDisqus from '../hooks/useDisqus';
 import { PostNode } from '../types/post';
 import { format, getRelativeTimeFromNow } from '../utils/date';
 import { slugify } from '../utils/slugify';
@@ -44,6 +46,13 @@ const PostTemplate: FC<Props> = ({ data, pageContext }) => {
 
   const relativeDate = getRelativeTimeFromNow(date);
   const formattedDate = format(date);
+  const canonicalUrl = `${config.siteUrl}${slug}`;
+
+  const disqusConfig = useDisqus({
+    title,
+    date,
+    slug,
+  });
 
   return (
     <Layout>
@@ -55,7 +64,7 @@ const PostTemplate: FC<Props> = ({ data, pageContext }) => {
         {tags && tags.length > 0 && (
           <meta name='keywords' content={tags.join(',')} />
         )}
-        <link rel='canonical' href={`${config.siteUrl}/${slug}`} />
+        <link rel='canonical' href={canonicalUrl} />
       </Helmet>
       <Helmet>
         <title>
@@ -80,6 +89,7 @@ const PostTemplate: FC<Props> = ({ data, pageContext }) => {
             <div className={`md:ml-14`}>
               <AuthorBar dateTime={date} formattedDate={formattedDate} />
               <ArticleContent body={body} />
+              {disqusConfig && <Disqus config={disqusConfig} />}
             </div>
           </div>
           <div

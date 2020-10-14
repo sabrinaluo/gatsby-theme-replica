@@ -26,6 +26,7 @@ const PostCardList: FC = () => {
             title
             tags
             category
+            date
           }
           fields {
             slug

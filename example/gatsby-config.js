@@ -5,10 +5,15 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `hiitea-tech`,
+      },
+    },
+    {
       resolve: 'gatsby-theme-replica',
       options: {
         contentPath: 'content',
-        basePath: '/',
       },
     },
   ],
