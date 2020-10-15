@@ -1,23 +1,87 @@
 import { Link } from 'gatsby';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { FaGithub } from 'react-icons/fa';
 import { IoIosAdd, IoIosNotificationsOutline } from 'react-icons/io';
 import { RiArrowDropDownFill } from 'react-icons/ri';
+import styled from 'styled-components';
 
 import config from '../../../_config';
+import { color } from '../../theme';
 import NavList from './NavList';
 
+const StyledSearchBox = styled.div`
+  .gsc-control-cse {
+    background-color: ${color.gray.dark};
+    border: none;
+    padding: 0;
+  }
+
+  .gsc-search-button {
+    display: none;
+  }
+
+  .gsc-input-box {
+    border: none;
+    border-radius: 6px;
+    background-color: hsla(0, 0%, 100%, 0.125);
+  }
+
+  .gsc-search-box {
+    margin-bottom: 0 !important;
+  }
+
+  .gsib_a {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  /* clear text button */
+  .gsst_a {
+    .gscb_a {
+      font-size: 24px;
+      color: ${color.gray.light};
+    }
+    &:hover .gscb_a {
+      color: white;
+    }
+  }
+
+  input.gsc-input {
+    color: white;
+    font-size: 14px;
+    width: 240px !important;
+    background: none !important;
+    &:focus {
+      width: 500px !important;
+    }
+  }
+`;
 const TopBar: FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const toggleMobileMenu = () => {
     setIsExpanded((state) => !state);
   };
 
+  useEffect(() => {
+    if (!config.gcse) return;
+    const gcseScriptId = 'gcse';
+    if (document.getElementById(gcseScriptId)) return;
+
+    const cx = '';
+    const gcse = document.createElement('script');
+    gcse.id = gcseScriptId;
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = `//cse.google.com/cse.js?cx=${cx}`;
+    const s = document.getElementsByTagName('script')[0];
+    s?.parentNode?.insertBefore(gcse, s);
+  }, []);
+
   return (
     <div className={`bg-gray-dark p-4 md:py-0 md:px-6`}>
       <div
-        className={`w-full flex justify-between md:justify-auto items-center  md:h-60px`}
+        className={`w-full flex justify-between md:justify-auto items-center md:h-60px`}
       >
         <div className={`block md:hidden text-white text-3xl`}>
           <AiOutlineMenu onClick={toggleMobileMenu} />
@@ -28,7 +92,13 @@ const TopBar: FC = () => {
         </Link>
 
         <div className={`hidden md:flex items-center flex-grow px-4`}>
-          <input className={`w-64 focus:w-1/2`} />
+          {config.gcse ? (
+            <StyledSearchBox>
+              <div className='gcse-search'></div>
+            </StyledSearchBox>
+          ) : (
+            <input className={`w-64 focus:w-1/2`} />
+          )}
           <NavList
             className={`flex ml-2 text-sm font-semibold`}
             itemClassName={`mx-2 py-4 text-white hover:no-underline hover:text-opacity-75`}

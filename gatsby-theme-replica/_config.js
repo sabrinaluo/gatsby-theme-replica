@@ -14,6 +14,7 @@ const config = {
     text: 'I may be slow to respond',
     isBusy: true,
   },
+  gcse: '',
   footerList: [
     {
       text: 'Home',
