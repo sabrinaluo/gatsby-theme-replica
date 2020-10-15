@@ -1,6 +1,7 @@
 import { Link } from 'gatsby';
 import React, { FC } from 'react';
 
+import config from '../../../_config';
 import { navTabs } from '../../constants/nav';
 import useTotal from '../../hooks/useTotal';
 
@@ -44,6 +45,13 @@ const NavList: FC<Props> = ({
           </Link>
         );
       })}
+      <Link
+        to={'/'}
+        className={`py-2 text-white hover:no-underline flex md:hidden items-center border-t-fade-white15`}
+      >
+        <img src={config.avatar} className={`rounded-full mr-2`} width={20} />
+        {config.author}
+      </Link>
     </div>
   );
 };

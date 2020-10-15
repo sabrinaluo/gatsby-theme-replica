@@ -2,7 +2,7 @@
   @apply w-full;
   @apply max-w-screen-xl;
   @apply px-4;
-  @apply m-auto;
+  @apply mx-auto;
   @apply flex;
   @apply flex-wrap
 }
