@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby';
 
-import config from '../../_config';
+import useConfig from '../hooks/useConfig';
 
 interface UseDisqusArgs {
   date: string;
@@ -16,6 +16,8 @@ const useDisqus = ({ date, title, slug }: UseDisqusArgs) => {
       }
     }
   `);
+
+  const config = useConfig();
 
   return data.allSitePlugin.totalCount === 1
     ? {

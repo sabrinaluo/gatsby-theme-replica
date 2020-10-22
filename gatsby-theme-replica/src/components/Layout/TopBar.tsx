@@ -6,7 +6,7 @@ import { IoIosAdd, IoIosNotificationsOutline } from 'react-icons/io';
 import { RiArrowDropDownFill } from 'react-icons/ri';
 import styled from 'styled-components';
 
-import config from '../../../_config';
+import useConfig from '../../hooks/useConfig';
 import { color } from '../../theme';
 import NavList from './NavList';
 
@@ -58,6 +58,7 @@ const StyledSearchBox = styled.div`
   }
 `;
 const TopBar: FC = () => {
+  const config = useConfig();
   const [isExpanded, setIsExpanded] = useState(false);
   const toggleMobileMenu = () => {
     setIsExpanded((state) => !state);

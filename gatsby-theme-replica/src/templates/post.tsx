@@ -5,13 +5,13 @@ import React, { FC } from 'react';
 import { Helmet } from 'react-helmet';
 import { FaRegFolderOpen } from 'react-icons/fa';
 
-import config from '../../_config';
 import ArticleContent from '../components/Article/ArticleContent';
 import ArticleTitle from '../components/Article/ArticleTitle';
 import AuthorBar from '../components/Article/AuthorBar';
 import Layout from '../components/Layout';
 import TableOfContent from '../components/TableOfContent';
 import Tag from '../components/Tag';
+import useConfig from '../hooks/useConfig';
 import useDisqus from '../hooks/useDisqus';
 import { PostNode } from '../types/post';
 import { format, getRelativeTimeFromNow } from '../utils/date';
@@ -39,6 +39,7 @@ interface Props {
 }
 
 const PostTemplate: FC<Props> = ({ data, pageContext }) => {
+  const config = useConfig();
   const { title, date, tags, category } = data.post.frontmatter;
   const { timeToRead, tableOfContents, body, excerpt } = data.post;
   const { numericId, prevPost, nextPost } = pageContext;

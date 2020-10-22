@@ -1,8 +1,8 @@
 import { Link } from 'gatsby';
 import React, { FC } from 'react';
 
-import config from '../../../_config';
 import { navTabs } from '../../constants/nav';
+import useConfig from '../../hooks/useConfig';
 import useTotal from '../../hooks/useTotal';
 
 interface Props {
@@ -19,6 +19,7 @@ const NavList: FC<Props> = ({
   showCount,
 }) => {
   const total = useTotal();
+  const config = useConfig();
 
   return (
     <div className={className}>

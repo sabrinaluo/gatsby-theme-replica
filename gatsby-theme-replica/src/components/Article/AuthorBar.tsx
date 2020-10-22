@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { VscEllipsis, VscSmiley } from 'react-icons/vsc';
 import styled from 'styled-components';
 
-import config from '../../../_config';
+import useConfig from '../../hooks/useConfig';
 import { color } from '../../theme';
 
 const StyledBox = styled.div`
@@ -25,6 +25,7 @@ interface Props {
 }
 
 const AuthorBar: FC<Props> = ({ dateTime, formattedDate }) => {
+  const config = useConfig();
   return (
     <StyledBox
       className={`hidden md:flex items-center justify-between text-xs relative bg-blue-100 text-gray-main

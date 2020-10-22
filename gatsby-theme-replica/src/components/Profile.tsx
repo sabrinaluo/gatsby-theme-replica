@@ -6,7 +6,7 @@ import { FaGithub, FaStackOverflow } from 'react-icons/fa';
 import { GrBook, GrLocation } from 'react-icons/gr';
 import styled from 'styled-components';
 
-import config from '../../_config';
+import useConfig from '../hooks/useConfig';
 import useTotal from '../hooks/useTotal';
 import { color } from '../theme';
 import NavTab from './Layout/NavTabLayout/NavTab';
@@ -74,6 +74,7 @@ interface Props {}
 
 const Profile: FC<Props> = () => {
   const total = useTotal();
+  const config = useConfig();
   return (
     <>
       <div className={`w-full md:w-3/12 md:px-4`}>

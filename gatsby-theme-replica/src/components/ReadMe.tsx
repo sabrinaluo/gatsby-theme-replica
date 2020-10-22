@@ -3,7 +3,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React, { FC } from 'react';
 import { VscSmiley } from 'react-icons/vsc';
 
-import config from '../../_config';
+import useConfig from '../hooks/useConfig';
 
 const ReadMe: FC = () => {
   const data = useStaticQuery(graphql`
@@ -15,7 +15,7 @@ const ReadMe: FC = () => {
   `);
 
   const body = data.mdx?.body;
-
+  const config = useConfig();
   return body ? (
     <div className={`border rounded-md p-6 mb-6 w-full`}>
       <div className={`flex items-center text-xs mb-4 text-mono`}>
