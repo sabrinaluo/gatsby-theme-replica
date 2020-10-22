@@ -20,6 +20,7 @@
     "gatsby-plugin-nprogress": "^2.3.12",
     "gatsby-plugin-postcss": "^2.3.13",
     "gatsby-plugin-react-helmet": "^3.3.12",
+    "gatsby-plugin-sitemap": "^2.4.17",
     "gatsby-plugin-styled-components": "^3.3.12",
     "gatsby-plugin-typescript": "^2.4.21",
     "gatsby-source-filesystem": "^2.3.31",

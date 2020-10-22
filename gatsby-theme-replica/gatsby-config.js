@@ -2,6 +2,7 @@ const DEFAULT_CONTENT_PATH = 'content';
 require('ts-node').register({ files: true });
 const tailwindConfig = require('./tailwind.config');
 const rssFeedOption = require('./_gatsby/config/rss');
+const siteMapOption = require('./_gatsby/sitemap');
 
 module.exports = ({ contentPath = DEFAULT_CONTENT_PATH }) => ({
   siteMetadata: {
@@ -11,6 +12,10 @@ module.exports = ({ contentPath = DEFAULT_CONTENT_PATH }) => ({
     'gatsby-plugin-postcss',
     'gatsby-plugin-typescript',
     'gatsby-plugin-react-helmet',
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: siteMapOption,
+    },
     {
       resolve: 'gatsby-plugin-feed',
       options: rssFeedOption,

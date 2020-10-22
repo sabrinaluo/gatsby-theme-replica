@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Gatsby Theme Replica - example`,
-    siteUrl: 'https://www.example.com',
+    siteUrl: 'https://gatsby-theme-replica.vercel.app',
     siteName: `It's HiiTea Time!`,
     description: "Hiitea's tech blog for web development knowledge sharing",
     author: 'HiiTea',
