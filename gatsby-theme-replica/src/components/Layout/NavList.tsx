@@ -29,7 +29,12 @@ const NavList: FC<Props> = ({
         const count = total[item.countKey];
 
         return openInNewTab ? (
-          <a href={href} key={text} className={itemClassName} target='_blank'>
+          <a
+            href={`${config.pathPrefix ? config.pathPrefix : ''}${href}`}
+            key={text}
+            className={itemClassName}
+            target='_blank'
+          >
             {text}
           </a>
         ) : (

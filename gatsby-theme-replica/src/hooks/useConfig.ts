@@ -1,6 +1,7 @@
 import { graphql, useStaticQuery } from 'gatsby';
 
 interface SiteConfig {
+  pathPrefix: string;
   title: string;
   siteUrl: string;
   siteName: string;
@@ -31,6 +32,7 @@ const useSiteMetadata = () =>
   useStaticQuery(graphql`
     query SiteConfig {
       site {
+        pathPrefix
         siteMetadata {
           title
           description
@@ -58,7 +60,9 @@ const useSiteMetadata = () =>
 
 export const useConfig = () => {
   const { site } = useSiteMetadata();
-  return site.siteMetadata as Partial<SiteConfig>;
+  return { ...site.siteMetadata, pathPrefix: site.pathPrefix } as Partial<
+    SiteConfig
+  >;
 };
 
 export default useConfig;
