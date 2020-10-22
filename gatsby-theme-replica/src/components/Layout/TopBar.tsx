@@ -98,7 +98,7 @@ const TopBar: FC = () => {
               <div className='gcse-search'></div>
             </StyledSearchBox>
           ) : (
-            <input className={`w-64 focus:w-1/2`} />
+            <input className={`w-64 focus:w-1/2 px-2`} />
           )}
           <NavList
             className={`flex ml-2 text-sm font-semibold`}
