@@ -13,7 +13,10 @@ const BaseLayout: FC = ({ children }) => {
         <title>{config.siteName}</title>
         <meta name='description' content={config.description} />
         <meta name='author' content={config.author} />
-        <link rel='canonical' href={config.siteUrl} />
+        <link
+          rel='canonical'
+          href={`${config.siteUrl}${config.pathPrefix ?? ''}`}
+        />
         <link
           rel='icon'
           type='image/svg+xml'
