@@ -64,7 +64,11 @@ module.exports = {
         '64px': '64px',
       },
       inset: {
+        '-4px': '-4px',
+        '-2px': '-2px',
         1: '0.25rem',
+        '8px': '8px',
+        '10px': '10px',
         '74px': '74px',
       },
       listStyleType: {

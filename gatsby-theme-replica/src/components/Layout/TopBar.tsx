@@ -57,6 +57,18 @@ const StyledSearchBox = styled.div`
     }
   }
 `;
+
+const NotiDot = styled.div`
+  position: absolute;
+  z-index: 2;
+  width: 14px;
+  height: 14px;
+  color: var(--color-text-inverse);
+  background-image: linear-gradient(#54a3ff, #006eed);
+  background-clip: padding-box;
+  border: 2px solid ${color.gray.dark};
+  border-radius: 50%;
+`;
 const TopBar: FC = () => {
   const config = useConfig();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -106,10 +118,11 @@ const TopBar: FC = () => {
           />
         </div>
         <ul className={`flex items-center text-white font-semibold`}>
-          <li>
+          <li className={`relative`}>
             <IoIosNotificationsOutline
               className={`mr-0 md:mr-2 text-2xl md:text-xl`}
             />
+            <NotiDot className={`-top-2px left-10px md:left-8px md:-top-4px`} />
           </li>
           <li className={`hidden md:flex mr-2`}>
             <IoIosAdd className={`text-xl relative left-1`} />
