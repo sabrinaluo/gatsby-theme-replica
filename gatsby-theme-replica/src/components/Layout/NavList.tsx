@@ -10,6 +10,7 @@ interface Props {
   itemClassName?: string;
   activeClassName?: string;
   showCount?: boolean;
+  showAvatar?: boolean;
 }
 
 const NavList: FC<Props> = ({
@@ -17,6 +18,7 @@ const NavList: FC<Props> = ({
   itemClassName = '',
   activeClassName = '',
   showCount,
+  showAvatar,
 }) => {
   const total = useTotal();
   const config = useConfig();
@@ -51,13 +53,15 @@ const NavList: FC<Props> = ({
           </Link>
         );
       })}
-      <Link
-        to={'/'}
-        className={`py-2 text-white hover:no-underline flex md:hidden items-center border-t-fade-white15`}
-      >
-        <img src={config.avatar} className={`rounded-full mr-2`} width={20} />
-        {config.author}
-      </Link>
+      {showAvatar && (
+        <Link
+          to={'/'}
+          className={`py-2 text-white hover:no-underline flex md:hidden items-center border-t-fade-white15`}
+        >
+          <img src={config.avatar} className={`rounded-full mr-2`} width={20} />
+          {config.author}
+        </Link>
+      )}
     </div>
   );
 };

@@ -42,7 +42,7 @@ const NavTab: FC<Props> = ({ className }) => {
       <div className={`page-grid h-12`}>
         <div className={`hidden md:block md:w-3/12 md:px-4`}></div>
         <StyledNavList
-          className={`md:w-9/12 px-4 flex items-end overflow-x-scroll md:overflow-hidden`}
+          className={`md:w-9/12 md:px-4 flex items-end overflow-x-scroll md:overflow-hidden`}
           activeClassName={`nav-item__active`}
           showCount
         />

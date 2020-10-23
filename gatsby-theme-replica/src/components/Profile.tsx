@@ -175,7 +175,7 @@ const Profile: FC<Props> = () => {
           </div>
         </div>
       </div>
-      <NavTab className={`flex md:hidden w-screen -mx-8`} />
+      <NavTab className={`flex md:hidden w-screen -mx-4`} />
     </>
   );
 };

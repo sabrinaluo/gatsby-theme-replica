@@ -127,6 +127,7 @@ const TopBar: FC = () => {
           isExpanded ? 'h-auto' : 'h-0'
         } w-full font-semibold overflow-hidden`}
         itemClassName={`py-2 text-white hover:no-underline block border-t-fade-white15`}
+        showAvatar
       />
     </div>
   );
