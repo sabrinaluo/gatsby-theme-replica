@@ -1,9 +1,8 @@
+const dateUtil = require('../../_gatsby/utils/date');
 // yyyy-MM-dd
 type InputDate = Date | string | number;
-export const getDateString = (date: InputDate) =>
-  new Date(date).toLocaleDateString('fr-CA', {
-    timeZone: process.env.TZ || 'UTC',
-  });
+export const getDateString: (date: InputDate) => string =
+  dateUtil.getDateString;
 
 export const format = (date: InputDate) =>
   new Date(date).toLocaleDateString('en-US', {
