@@ -76,6 +76,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
       }
 
+      site {
+        pathPrefix
+        siteMetadata {
+          siteUrl
+        }
+      }
+
       tags: allMdx {
         group(field: frontmatter___tags) {
           fieldValue
@@ -99,6 +106,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     reporter.panic('error loading events', result.errors);
     return;
   }
+
+  const getPermalink = (path) => {
+    const { pathPrefix, siteMetadata } = result.data.site;
+    return `${siteMetadata.siteUrl}${pathPrefix ?? ''}${path}`;
+  };
 
   pages.forEach((page) => {
     actions.createPage({
@@ -130,14 +142,17 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           }
         : null;
 
+      const pagePathWithoutprefix = `${post.fields.slug}`;
+
       actions.createPage({
-        path: `${post.fields.slug}`,
+        path: pagePathWithoutprefix,
         component: require.resolve('./src/templates/post.tsx'),
         context: {
           postID: post.id,
           numericId: index + 1,
           prevPost,
           nextPost,
+          permalink: getPermalink(pagePathWithoutprefix),
         },
       });
     });

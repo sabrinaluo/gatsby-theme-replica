@@ -32,6 +32,7 @@ interface Props {
     numericId: number;
     prevPost?: RelatedPost;
     nextPost?: RelatedPost;
+    permalink: string;
   };
   data: {
     post: PostNode;
@@ -47,7 +48,7 @@ const PostTemplate: FC<Props> = ({ data, pageContext }) => {
 
   const relativeDate = getRelativeTimeFromNow(date);
   const formattedDate = format(date);
-  const canonicalUrl = `${config.siteUrl}${slug}`;
+  const canonicalUrl = pageContext.permalink;
 
   const disqusConfig = useDisqus({
     title,
@@ -66,12 +67,6 @@ const PostTemplate: FC<Props> = ({ data, pageContext }) => {
           <meta name='keywords' content={tags.join(',')} />
         )}
         <link rel='canonical' href={canonicalUrl} />
-      </Helmet>
-      <Helmet>
-        <title>
-          {title} - {config.siteName}
-        </title>
-        <link rel='canonical' href={slug} />
       </Helmet>
       <div className={`page-grid mt-4 md:px-8`}>
         <ArticleTitle
