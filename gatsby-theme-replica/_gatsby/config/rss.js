@@ -1,3 +1,4 @@
+const { RSS_FILENAME } = require('../../src/constants/key');
 const query = `
 {
   site {
@@ -46,7 +47,7 @@ const feeds = [
       });
     },
     query: feedQuery,
-    output: '/rss.xml',
+    output: `/${RSS_FILENAME}`,
     title: `RSS Feed`,
     // optional configuration to insert feed reference in pages:
     // if `string` is used, it will be used to create RegExp and then test if pathname of

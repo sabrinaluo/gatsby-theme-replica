@@ -1,4 +1,4 @@
-import { CATEGORY_DIR, TAG_DIR } from '../constants/key';
+import { CATEGORY_DIR, RSS_FILENAME, TAG_DIR } from '../constants/key';
 
 export enum PageKey {
   HOME,
@@ -34,7 +34,7 @@ export const navTabs = [
   },
   {
     key: PageKey.RSS,
-    href: '/rss.xml',
+    href: `/${RSS_FILENAME}`,
     text: 'RSS',
     openInNewTab: true,
   },
