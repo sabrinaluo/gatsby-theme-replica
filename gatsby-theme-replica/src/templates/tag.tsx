@@ -25,6 +25,7 @@ export const query = graphql`
         }
         slug
       }
+      totalCount
     }
   }
 `;
@@ -36,16 +37,18 @@ interface Props {
   data: {
     allMdx: {
       nodes: PostNode[];
+      totalCount: number;
     };
   };
 }
 
 const TagTemplate: FC<Props> = ({ pageContext, data }) => {
   const { tag } = pageContext;
-  const posts = data.allMdx.nodes;
+  const { totalCount, nodes: posts } = data.allMdx;
   return (
     <Layout mode={LayoutMode.NavTab}>
-      <div>
+      <div className={`text-sm border-b pb-4`}>
+        <strong>{totalCount}</strong> post{totalCount > 1 ? 's' : ''} in tag{' '}
         <Tag tag={tag} />
       </div>
       <PostList posts={posts} />

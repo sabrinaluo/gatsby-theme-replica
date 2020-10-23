@@ -27,6 +27,7 @@ export const query = graphql`
         }
         slug
       }
+      totalCount
     }
   }
 `;
@@ -38,16 +39,20 @@ interface Props {
   data: {
     allMdx: {
       nodes: PostNode[];
+      totalCount: number;
     };
   };
 }
 
 const CategoryTemplate: FC<Props> = ({ data, pageContext }) => {
-  const posts = data.allMdx.nodes;
+  const { totalCount, nodes: posts } = data.allMdx;
   const { category } = pageContext;
   return (
     <Layout mode={LayoutMode.NavTab}>
-      <div>{category}</div>
+      <div className={`text-sm border-b pb-4`}>
+        <strong>{totalCount}</strong> post{totalCount > 1 ? 's' : ''} in
+        category <strong>{category || 'Uncategorized'}</strong>
+      </div>
       <PostList posts={posts} />
     </Layout>
   );
