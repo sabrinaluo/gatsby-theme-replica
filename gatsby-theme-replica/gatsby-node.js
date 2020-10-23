@@ -2,7 +2,7 @@ const fs = require('fs');
 const { createFilePath } = require(`gatsby-source-filesystem`);
 require('ts-node').register({ files: true });
 const { slugify } = require('./src/utils/slugify');
-const { UNCATEGORIZED } = require('./src/constants/key');
+const { UNCATEGORIZED, CATEGORY_DIR, TAG_DIR } = require('./src/constants/key');
 const DEFAULT_CONTENT_PATH = 'content';
 const { getDateString } = require('./_gatsby/utils/date');
 
@@ -44,7 +44,7 @@ const pages = [
     template: 'home',
   },
   {
-    path: 'category',
+    path: `${CATEGORY_DIR}`,
     template: 'categories',
   },
   {
@@ -52,7 +52,7 @@ const pages = [
     template: 'archive',
   },
   {
-    path: 'tag',
+    path: `${TAG_DIR}`,
     template: 'tags',
   },
 ];
@@ -166,7 +166,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     tags.forEach((o) => {
       const slug = slugify(o.fieldValue);
       actions.createPage({
-        path: `/tag/${slug}`,
+        path: `/${TAG_DIR}/${slug}`,
         component: require.resolve('./src/templates/tag.tsx'),
         context: {
           tag: o.fieldValue,
@@ -182,7 +182,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     categories.forEach((o) => {
       const slug = slugify(o.fieldValue);
       actions.createPage({
-        path: `/category/${slug}`,
+        path: `/${CATEGORY_DIR}/${slug}`,
         component: require.resolve('./src/templates/category.tsx'),
         context: {
           category: o.fieldValue,
@@ -192,7 +192,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
     if (uncategorized.totalCount > 0) {
       actions.createPage({
-        path: `/category/${UNCATEGORIZED}`,
+        path: `/${CATEGORY_DIR}/${UNCATEGORIZED}`,
         component: require.resolve('./src/templates/category.tsx'),
         context: {
           category: null,

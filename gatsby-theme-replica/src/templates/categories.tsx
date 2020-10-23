@@ -2,7 +2,7 @@ import { Link, graphql } from 'gatsby';
 import React, { FC, useMemo } from 'react';
 
 import Layout, { LayoutMode } from '../components/Layout';
-import { UNCATEGORIZED } from '../constants/key';
+import { CATEGORY_DIR, UNCATEGORIZED } from '../constants/key';
 import { slugify } from '../utils/slugify';
 
 export const query = graphql`
@@ -49,7 +49,7 @@ const CategoriesTemplate: FC<Props> = ({ data }) => {
       <ul>
         {categories.map(([category, count]) => (
           <li key={category}>
-            <Link to={`/category/${slugify(category)}`}>
+            <Link to={`/${CATEGORY_DIR}/${slugify(category)}`}>
               {category} ({count})
             </Link>
           </li>

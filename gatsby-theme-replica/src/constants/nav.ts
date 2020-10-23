@@ -1,3 +1,5 @@
+import { CATEGORY_DIR, TAG_DIR } from '../constants/key';
+
 export enum PageKey {
   HOME,
   ARCHIVES,
@@ -21,13 +23,13 @@ export const navTabs = [
   {
     key: PageKey.CATEGORIES,
     countKey: 'category',
-    href: '/category',
+    href: `/${CATEGORY_DIR}`,
     text: 'Categories',
   },
   {
     key: PageKey.TAGS,
     countKey: 'tag',
-    href: '/tag',
+    href: `/${TAG_DIR}`,
     text: 'Tags',
   },
   {

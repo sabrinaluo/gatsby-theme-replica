@@ -11,6 +11,7 @@ import AuthorBar from '../components/Article/AuthorBar';
 import Layout from '../components/Layout';
 import TableOfContent from '../components/TableOfContent';
 import Tag from '../components/Tag';
+import { CATEGORY_DIR } from '../constants/key';
 import useConfig from '../hooks/useConfig';
 import useDisqus from '../hooks/useDisqus';
 import { PostNode } from '../types/post';
@@ -110,7 +111,7 @@ const PostTemplate: FC<Props> = ({ data, pageContext }) => {
             <h2 className={`mb-4 font-medium`}>About</h2>
             {category && (
               <Link
-                to={`/category/${slugify(category)}`}
+                to={`/${CATEGORY_DIR}/${slugify(category)}`}
                 className={`flex items-center text-gray-medium hover:text-blue hover:no-underline mb-4`}
               >
                 <FaRegFolderOpen />

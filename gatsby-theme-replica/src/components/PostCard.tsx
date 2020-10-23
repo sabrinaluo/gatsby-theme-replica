@@ -7,6 +7,7 @@ import { GrBook, GrDrag } from 'react-icons/gr';
 import { VscComment } from 'react-icons/vsc';
 import styled from 'styled-components';
 
+import { CATEGORY_DIR, TAG_DIR } from '../constants/key';
 import useDisqus from '../hooks/useDisqus';
 import { color } from '../theme';
 import { BriefPost } from '../types/post';
@@ -72,12 +73,12 @@ const PostCard: FC<Props> = ({
       <div className={`flex-grow mt-2 mb-4 text-gray-main`}>{excerpt}</div>
       <div className={`flex items-center`}>
         {category && (
-          <StyledLink to={`/category/${slugify(category)}`}>
+          <StyledLink to={`/${CATEGORY_DIR}/${slugify(category)}`}>
             <FaRegFolderOpen size={16} /> {category}
           </StyledLink>
         )}
         {tags && tags.length > 0 && (
-          <StyledLink to={`/tag`}>
+          <StyledLink to={`/${TAG_DIR}`}>
             <AiOutlineTags size={16} />
             {tags.length}
           </StyledLink>

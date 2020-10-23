@@ -6,6 +6,7 @@ import { FaGithub, FaStackOverflow } from 'react-icons/fa';
 import { GrBook, GrLocation } from 'react-icons/gr';
 import styled from 'styled-components';
 
+import { CATEGORY_DIR, TAG_DIR } from '../constants/key';
 import useConfig from '../hooks/useConfig';
 import useTotal from '../hooks/useTotal';
 import { color } from '../theme';
@@ -127,12 +128,12 @@ const Profile: FC<Props> = () => {
               </Link>
             </li>
             <li>
-              <Link to={'/category'}>
+              <Link to={`/${CATEGORY_DIR}`}>
                 <strong>{total.category}</strong> categories
               </Link>
             </li>
             <li>
-              <Link to={`/tag`}>
+              <Link to={`/${TAG_DIR}`}>
                 <AiOutlineTags />
                 <strong>{total.tag}</strong>
               </Link>
