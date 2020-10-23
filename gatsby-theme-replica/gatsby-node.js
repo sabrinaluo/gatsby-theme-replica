@@ -19,7 +19,8 @@ exports.onPreBootstrap = ({ reporter }, options) => {
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
   if (node.internal.type === 'Mdx') {
-    const value = createFilePath({ node, getNode });
+    const value = createFilePath({ node, getNode }).replace(/^\/(\d{8}-)/, '/'); // TODO configurable pattern
+
     const dateString = getDateString(node.frontmatter.date);
     const datePath = dateString ? `/${dateString.split('-').join('/')}` : '';
 
@@ -142,17 +143,17 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           }
         : null;
 
-      const pagePathWithoutprefix = `${post.fields.slug}`;
+      const pagePathWithoutPrefix = `${post.fields.slug}`;
 
       actions.createPage({
-        path: pagePathWithoutprefix,
+        path: pagePathWithoutPrefix,
         component: require.resolve('./src/templates/post.tsx'),
         context: {
           postID: post.id,
           numericId: index + 1,
           prevPost,
           nextPost,
-          permalink: getPermalink(pagePathWithoutprefix),
+          permalink: getPermalink(pagePathWithoutPrefix),
         },
       });
     });
