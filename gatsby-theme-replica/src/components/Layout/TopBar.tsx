@@ -69,7 +69,7 @@ const TopBar: FC = () => {
     const gcseScriptId = 'gcse';
     if (document.getElementById(gcseScriptId)) return;
 
-    const cx = '';
+    const cx = config.gcse;
     const gcse = document.createElement('script');
     gcse.id = gcseScriptId;
     gcse.type = 'text/javascript';
