@@ -14,6 +14,11 @@ const BaseLayout: FC = ({ children }) => {
         <meta name='description' content={config.description} />
         <meta name='author' content={config.author} />
         <link rel='canonical' href={config.siteUrl} />
+        <link
+          rel='icon'
+          type='image/svg+xml'
+          href='https://github.githubassets.com/favicons/favicon.svg'
+        ></link>
       </Helmet>
       <TopBar />
       {children}

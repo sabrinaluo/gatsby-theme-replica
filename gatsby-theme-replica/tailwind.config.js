@@ -41,6 +41,8 @@ module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
+    defaultLineHeights: true,
+    standardFontWeights: true,
   },
   purge: [
     path.resolve(__dirname, './src/**/*.tsx'),
