@@ -17,9 +17,16 @@ const StyledNavList = styled(NavList)`
       text-decoration: none;
     }
 
+    > svg {
+      color: ${color.gray[200]};
+    }
+
     &.nav-item__active {
       border-bottom-color: ${color.orange};
       font-weight: bold;
+      > svg {
+        color: ${color.gray.dark};
+      }
     }
   }
 
@@ -34,9 +41,10 @@ const StyledNavList = styled(NavList)`
 
 interface Props {
   className?: string;
+  showIcon?: boolean;
 }
 
-const NavTab: FC<Props> = ({ className }) => {
+const NavTab: FC<Props> = ({ className, showIcon }) => {
   return (
     <div className={`${className} border-b mt-6 sticky top-0 bg-white z-10`}>
       <div className={`page-grid h-12`}>
@@ -45,6 +53,7 @@ const NavTab: FC<Props> = ({ className }) => {
           className={`md:w-9/12 md:px-4 flex items-end overflow-x-scroll md:overflow-hidden`}
           activeClassName={`nav-item__active`}
           showCount
+          showIcon={showIcon}
         />
       </div>
     </div>

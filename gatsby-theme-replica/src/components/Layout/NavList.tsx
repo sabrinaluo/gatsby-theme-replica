@@ -11,6 +11,7 @@ interface Props {
   activeClassName?: string;
   showCount?: boolean;
   showAvatar?: boolean;
+  showIcon?: boolean;
 }
 
 const NavList: FC<Props> = ({
@@ -19,6 +20,7 @@ const NavList: FC<Props> = ({
   activeClassName = '',
   showCount,
   showAvatar,
+  showIcon,
 }) => {
   const total = useTotal();
   const config = useConfig();
@@ -26,7 +28,7 @@ const NavList: FC<Props> = ({
   return (
     <div className={className}>
       {navTabs.map((item) => {
-        const { openInNewTab, text, href } = item;
+        const { openInNewTab, text, href, Icon } = item;
         // @ts-ignore
         const count = total[item.countKey];
 
@@ -37,6 +39,7 @@ const NavList: FC<Props> = ({
             className={itemClassName}
             target='_blank'
           >
+            {showIcon && <Icon className={`inline-block mr-2`} />}
             {text}
           </a>
         ) : (
@@ -46,6 +49,7 @@ const NavList: FC<Props> = ({
             to={href}
             activeClassName={activeClassName}
           >
+            {showIcon && <Icon className={`inline-block mr-2`} />}
             <span>{text}</span>
             {showCount && count !== undefined && (
               <span className={`nav-count`}>{count}</span>

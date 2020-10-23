@@ -7,7 +7,7 @@ import NavTab from './NavTab';
 const Index: FC = ({ children }) => {
   return (
     <BaseLayout>
-      <NavTab className={`hidden md:flex`} />
+      <NavTab className={`hidden md:flex`} showIcon />
       <div className={`page-grid flex flex-wrap md:flex-row`}>
         <Profile />
 
