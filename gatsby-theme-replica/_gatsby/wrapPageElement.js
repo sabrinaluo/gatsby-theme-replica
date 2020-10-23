@@ -24,13 +24,13 @@ const getHeadingWithId = () => {
 
 const component = {
   ...getHeadingWithId(),
-  a: (props) => {
+  a: ({ children, ...props }) => {
     if (/https?:\/\/jsfiddle\.net\/\w+\/\w+/.test(props.href)) {
       return <JsFiddle src={props.href} />;
     } else if (/https?:\/\/gist\.github\.com/.test(props.href)) {
       return <Gist src={props.href} />;
     }
-    return <a {...props} />;
+    return <a {...props}>{children}</a>;
   },
   pre: (props) => {
     const className = props.children.props.className || '';
