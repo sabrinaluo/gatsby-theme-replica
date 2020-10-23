@@ -8,6 +8,12 @@ const slugify = (str) => {
   return new slugger().slug(str);
 };
 
+const trimTailingSlash = (str) => {
+  const hasTailingSlash = str.slice(-1) === '/';
+  return hasTailingSlash ? str.slice(0, -1) : str;
+};
+
 module.exports = {
   slugify,
+  trimTailingSlash,
 };

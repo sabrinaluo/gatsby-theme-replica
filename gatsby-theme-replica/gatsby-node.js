@@ -4,6 +4,7 @@ require('ts-node').register({ files: true });
 const { slugify } = require('./src/utils/slugify');
 const { UNCATEGORIZED } = require('./src/constants/key');
 const DEFAULT_CONTENT_PATH = 'content';
+const { getDateString } = require('./_gatsby/utils/date');
 
 // Make sure the content directory exists
 exports.onPreBootstrap = ({ reporter }, options) => {
@@ -19,10 +20,13 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
   if (node.internal.type === 'Mdx') {
     const value = createFilePath({ node, getNode });
+    const dateString = getDateString(node.frontmatter.date);
+    const datePath = dateString ? `/${dateString.split('-').join('/')}` : '';
+
     createNodeField({
       name: 'slug',
       node,
-      value: `/post${value}`,
+      value: `${datePath}${value}`,
     });
 
     createNodeField({
@@ -52,11 +56,6 @@ const pages = [
   },
 ];
 
-const trimTailingSlash = (str) => {
-  const hasTailingSlash = str.slice(-1) === '/';
-  return hasTailingSlash ? str.slice(0, -1) : str;
-};
-
 exports.createPages = async ({ actions, graphql, reporter }) => {
   // Exclude README.md, it's reserved to be a section in overview page
   const result = await graphql(`
@@ -75,10 +74,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             title
           }
         }
-      }
-
-      site {
-        pathPrefix
       }
 
       tags: allMdx {
@@ -105,11 +100,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return;
   }
 
-  const prefix = trimTailingSlash(result.data.site.pathPrefix);
-
   pages.forEach((page) => {
     actions.createPage({
-      path: `${prefix}/${page.path}`,
+      path: `/${page.path}`,
       component: require.resolve(`./src/templates/${page.template}.tsx`),
     });
   });
@@ -138,7 +131,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         : null;
 
       actions.createPage({
-        path: `${prefix}${post.fields.slug}`,
+        path: `${post.fields.slug}`,
         component: require.resolve('./src/templates/post.tsx'),
         context: {
           postID: post.id,
@@ -157,7 +150,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     tags.forEach((o) => {
       const slug = slugify(o.fieldValue);
       actions.createPage({
-        path: `${prefix}/tag/${slug}`,
+        path: `/tag/${slug}`,
         component: require.resolve('./src/templates/tag.tsx'),
         context: {
           tag: o.fieldValue,
@@ -173,7 +166,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     categories.forEach((o) => {
       const slug = slugify(o.fieldValue);
       actions.createPage({
-        path: `${prefix}/category/${slug}`,
+        path: `/category/${slug}`,
         component: require.resolve('./src/templates/category.tsx'),
         context: {
           category: o.fieldValue,
@@ -183,7 +176,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
     if (uncategorized.totalCount > 0) {
       actions.createPage({
-        path: `${prefix}/category/${UNCATEGORIZED}`,
+        path: `/category/${UNCATEGORIZED}`,
         component: require.resolve('./src/templates/category.tsx'),
         context: {
           category: null,
