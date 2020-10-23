@@ -28,6 +28,7 @@ interface SiteConfig {
   }[];
 }
 
+// todo gql schema, allow nullish
 const useSiteMetadata = () =>
   useStaticQuery(graphql`
     query SiteConfig {
@@ -45,6 +46,11 @@ const useSiteMetadata = () =>
           link
           avatar
           gcse
+          status {
+            emoji
+            text
+            isBusy
+          }
           footerList {
             link
             text
