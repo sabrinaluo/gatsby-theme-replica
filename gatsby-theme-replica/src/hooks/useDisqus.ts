@@ -22,7 +22,7 @@ const useDisqus = ({ date, title, slug }: UseDisqusArgs) => {
   return data.allSitePlugin.totalCount === 1
     ? {
         url: `${config.siteUrl}${slug}`,
-        identifier: new Date(date).getTime() / 1000,
+        identifier: String(new Date(date).getTime() / 1000),
         title,
       }
     : null;
