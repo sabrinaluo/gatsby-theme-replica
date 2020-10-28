@@ -1,6 +1,4 @@
-# Gatsby Theme Minimal Example
+# Gatsby Theme Replica Example
 
 A usage of
-[gatsby-theme-minimal](https://github.com/ChristopherBiscardi/gatsby-theme-minimal)
-that does nothing but use the theme. As a result you will see `Error: Missing resources for /` when navigating to `localhost:8000`. To get
-rid of that, create a page in `src/pages/index.js`.
+[gatsby-theme-replica](https://github.com/sabrinaluo/gatsby-theme-replica)
